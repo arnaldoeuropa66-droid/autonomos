@@ -1,1602 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Autónomo sin drama · Guía completa España 2026</title>
-<meta name="description" content="Guía completa para darte de alta como autónomo en España, pagar lo justo y sobrevivir a Hacienda. Calendario fiscal 2026, calculadora, simulador autónomo vs SL y más.">
-<meta name="theme-color" content="#0d7377">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Autónomo">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
-<style>
-:root {
-  --gold-50: #faf5e6;
-  --gold-100: #f2e6c2;
-  --gold-300: #e8c87a;
-  --gold-500: #c9a961;
-  --gold-700: #a6873f;
-  --aqua-50: #e6f7f5;
-  --aqua-100: #c2ece8;
-  --aqua-300: #5eead4;
-  --aqua-500: #14b8a6;
-  --aqua-700: #0d7377;
-  --aqua-900: #064e52;
-  --ink: #1a1f2e;
-  --ink-soft: #4a5262;
-  --ink-mute: #7a8291;
-  --paper: #fdfbf7;
-  --paper-warm: #f7f3ea;
-  --white: #ffffff;
-  --border: #e8e2d3;
-  --border-soft: #f0ebdd;
-  --shadow-sm: 0 1px 2px rgba(26,31,46,0.04), 0 1px 3px rgba(26,31,46,0.03);
-  --shadow-md: 0 4px 12px rgba(26,31,46,0.06), 0 2px 4px rgba(26,31,46,0.04);
-  --shadow-lg: 0 12px 32px rgba(26,31,46,0.08), 0 4px 8px rgba(26,31,46,0.04);
-  --shadow-gold: 0 8px 24px rgba(201,169,97,0.18);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--paper);
-  color: var(--ink);
-  min-height: 100vh;
-  font-size: 15px;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  background-image:
-    radial-gradient(circle at 15% 10%, rgba(20,184,166,0.05) 0%, transparent 35%),
-    radial-gradient(circle at 85% 90%, rgba(201,169,97,0.06) 0%, transparent 40%);
-  background-attachment: fixed;
-  overscroll-behavior-y: none;
-}
-
-/* ============ LAYOUT ============ */
-.layout { display: flex; min-height: 100vh; }
-
-.sidebar {
-  width: 260px;
-  background: var(--white);
-  border-right: 1px solid var(--border-soft);
-  padding: 1.75rem 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  flex-shrink: 0;
-  box-shadow: 1px 0 0 rgba(26,31,46,0.02);
-}
-.sidebar-logo {
-  font-family: 'Fraunces', serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  padding: 0 1.5rem 1.5rem;
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.sidebar-logo::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, var(--gold-500), var(--aqua-500));
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px var(--gold-50);
-  flex-shrink: 0;
-}
-.sidebar-logo .brand { color: var(--ink); }
-.sidebar-logo .accent { color: var(--aqua-700); font-style: italic; }
-
-.sidebar-nav { display: flex; flex-direction: column; gap: 1px; padding: 0 0.75rem; }
-.sidebar-item {
-  padding: 9px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  color: var(--ink-soft);
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  background: none;
-  border: none;
-  text-align: left;
-  font-family: inherit;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-}
-.sidebar-item::before {
-  content: '';
-  width: 3px;
-  height: 0;
-  background: linear-gradient(180deg, var(--gold-500), var(--aqua-500));
-  border-radius: 2px;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: height 0.25s ease;
-}
-.sidebar-item:hover { background: var(--paper-warm); color: var(--ink); }
-.sidebar-item.active {
-  background: linear-gradient(90deg, rgba(201,169,97,0.10), rgba(20,184,166,0.05));
-  color: var(--ink);
-  font-weight: 600;
-}
-.sidebar-item.active::before { height: 60%; }
-.sidebar-divider {
-  height: 1px;
-  background: var(--border-soft);
-  margin: 0.75rem 1.25rem;
-}
-
-.content { flex: 1; padding: 0; max-width: 1100px; margin: 0 auto; }
-
-/* ============ BOTÓN MENÚ MÓVIL ============ */
-.menu-toggle {
-  display: none;
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  z-index: 200;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--aqua-900), var(--aqua-700));
-  color: var(--white);
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(13,115,119,0.35);
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-family: inherit;
-}
-.menu-toggle:active { transform: scale(0.95); }
-
-.drawer-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(26,31,46,0.5);
-  z-index: 300;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-.drawer-overlay.open { display: block; }
-
-.drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 82%;
-  max-width: 320px;
-  background: var(--white);
-  z-index: 400;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-y: auto;
-  padding: 1.5rem 0;
-  box-shadow: -8px 0 32px rgba(26,31,46,0.15);
-  padding-top: env(safe-area-inset-top);
-}
-.drawer.open { transform: translateX(0); }
-.drawer-header {
-  padding: 0 1.5rem 1.25rem;
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 0.75rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.drawer-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-.drawer-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--ink-mute);
-  cursor: pointer;
-  padding: 4px 8px;
-  font-family: inherit;
-}
-.drawer-nav { display: flex; flex-direction: column; padding: 0 0.75rem; }
-.drawer-item {
-  padding: 12px 14px;
-  font-size: 14.5px;
-  cursor: pointer;
-  color: var(--ink-soft);
-  border-radius: 8px;
-  transition: all 0.2s;
-  background: none;
-  border: none;
-  text-align: left;
-  font-family: inherit;
-  width: 100%;
-}
-.drawer-item:hover { background: var(--paper-warm); color: var(--ink); }
-.drawer-item.active {
-  background: linear-gradient(90deg, rgba(201,169,97,0.12), rgba(20,184,166,0.06));
-  color: var(--ink);
-  font-weight: 600;
-}
-
-/* ============ HERO ============ */
-.hero {
-  background: linear-gradient(135deg, #064e52 0%, #0d7377 50%, #14b8a6 100%);
-  color: var(--white);
-  padding: 4rem 3rem 3.5rem;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(232,200,122,0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(94,234,212,0.12) 0%, transparent 40%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold-300), var(--gold-500), var(--gold-300));
-}
-.hero-inner { position: relative; z-index: 1; max-width: 720px; }
-.hero-badge {
-  display: inline-block;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border: 1px solid rgba(232,200,122,0.5);
-  border-radius: 20px;
-  color: var(--gold-300);
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-.hero h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-.hero h1 .accent {
-  font-style: italic;
-  color: var(--gold-300);
-  font-weight: 400;
-}
-.hero p { font-size: 1rem; opacity: 0.85; max-width: 540px; line-height: 1.7; }
-
-/* ============ SECCIONES ============ */
-.section { display: none; padding: 2.5rem 3rem 4rem; }
-.section.active { display: block; animation: fadeSlide 0.4s ease; }
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.section-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.01em;
-}
-.section-title::after {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold-500), var(--aqua-500));
-  margin-top: 0.6rem;
-  border-radius: 2px;
-}
-.section-sub { font-size: 13px; color: var(--ink-mute); margin: 0.85rem 0 1.75rem; }
-
-/* ============ CARDS ============ */
-.card {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 1rem;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease;
-}
-.card:hover { box-shadow: var(--shadow-md); }
-
-/* ============ ALERTS ============ */
-.alert {
-  padding: 12px 16px;
-  font-size: 13px;
-  margin-bottom: 1rem;
-  line-height: 1.65;
-  border-radius: 8px;
-  border-left: 3px solid;
-}
-.alert-green { background: var(--aqua-50); color: var(--aqua-900); border-left-color: var(--aqua-500); }
-.alert-amber { background: var(--gold-50); color: #7a5a30; border-left-color: var(--gold-500); }
-.alert-red   { background: #fdf2f0; color: #8a3a30; border-left-color: #c9634a; }
-.alert-blue  { background: #f0f5fa; color: #2e4a6a; border-left-color: #5b8bc4; }
-
-/* ============ BADGE ============ */
-.badge {
-  display: inline-block;
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 12px;
-  margin-left: 6px;
-  font-weight: 500;
-  vertical-align: middle;
-}
-.badge-green { background: var(--aqua-50); color: var(--aqua-700); }
-.badge-amber { background: var(--gold-50); color: var(--gold-700); }
-.badge-blue  { background: #eef4fa; color: #2e4a6a; }
-.badge-red   { background: #fdf2f0; color: #8a3a30; }
-
-/* ============ STEPS ============ */
-.step-card {
-  border-left: 2px solid var(--gold-500);
-  padding: 0.25rem 0 0.25rem 1.15rem;
-  margin-bottom: 1.25rem;
-  position: relative;
-}
-.step-card::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold-500);
-  position: absolute;
-  left: -5px;
-  top: 8px;
-  box-shadow: 0 0 0 3px var(--gold-50);
-}
-.step-num {
-  font-size: 10px;
-  color: var(--gold-700);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 3px;
-}
-.step-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-.step-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
-.step-tip {
-  font-size: 12.5px;
-  margin-top: 8px;
-  padding: 8px 12px;
-  background: var(--aqua-50);
-  color: var(--aqua-900);
-  border-radius: 6px;
-  border-left: 2px solid var(--aqua-500);
-}
-
-/* ============ CALENDARIO ============ */
-.cal-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.cal-month {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-}
-.cal-month:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.cal-header {
-  padding: 11px 15px;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Fraunces', serif;
-}
-.cal-header.past { background: #f5f0e3; color: var(--ink-mute); }
-.cal-header.q1 { background: linear-gradient(135deg, #e6f0f7, #d4e6f2); color: #2e4a6a; }
-.cal-header.q2 { background: linear-gradient(135deg, #e0f5f0, #c8ebe2); color: var(--aqua-900); }
-.cal-header.q3 { background: linear-gradient(135deg, #faf0d8, #f2e2b4); color: #7a5a30; }
-.cal-header.q4 { background: linear-gradient(135deg, #fae5df, #f2d0c6); color: #8a3a30; }
-.cal-event {
-  padding: 10px 15px;
-  border-bottom: 1px solid var(--border-soft);
-  font-size: 12px;
-  display: flex;
-  gap: 10px;
-}
-.cal-event:last-child { border-bottom: none; }
-.cal-date { font-weight: 600; min-width: 55px; font-size: 11px; color: var(--ink-soft); }
-.cal-desc { color: var(--ink-soft); line-height: 1.55; flex: 1; }
-.cal-desc strong { color: var(--ink); }
-.cal-dl { display: block; font-size: 10px; margin-top: 2px; font-weight: 600; }
-.cal-dl.past { color: var(--ink-mute); }
-.cal-dl.ok { color: var(--aqua-700); }
-.cal-dl.warn { color: #c9634a; }
-.tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
-.tag-past { background: #ece7da; color: var(--ink-mute); }
-.tag-now  { background: var(--gold-100); color: var(--gold-700); }
-.tag-next { background: var(--aqua-100); color: var(--aqua-700); }
-
-/* ============ FORM ELEMENTS ============ */
-.fi {
-  padding: 9px 13px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-  background: var(--white);
-  color: var(--ink);
-  width: 145px;
-  font-family: inherit;
-  transition: all 0.2s;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.fi:focus {
-  outline: none;
-  border-color: var(--aqua-500);
-  box-shadow: 0 0 0 3px rgba(20,184,166,0.12);
-}
-
-/* ============ SIMULADOR ============ */
-.sim-row { display: flex; align-items: center; gap: 14px; margin-bottom: 0.85rem; flex-wrap: wrap; }
-.sim-label { font-size: 13px; color: var(--ink-soft); min-width: 210px; font-weight: 500; }
-.sim-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
-.sim-col {
-  padding: 1.25rem 1.35rem;
-  border: 1px solid var(--border-soft);
-  background: var(--paper-warm);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-.sim-col.winner {
-  border: 2px solid var(--gold-500);
-  background: var(--white);
-  box-shadow: var(--shadow-gold);
-}
-.sim-col-title {
-  font-family: 'Fraunces', serif;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-.sim-row2 {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12.5px;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--border-soft);
-}
-.sim-row2:last-child {
-  border: none;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--aqua-700);
-  margin-top: 6px;
-  padding-top: 8px;
-  border-top: 2px solid var(--border);
-}
-.sim-row2 span:first-child { color: var(--ink-mute); }
-
-/* ============ IAE ============ */
-.iae-search {
-  width: 100%;
-  padding: 12px 18px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  font-size: 14px;
-  background: var(--white);
-  color: var(--ink);
-  outline: none;
-  margin-bottom: 1.25rem;
-  font-family: inherit;
-  transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
-  -webkit-appearance: none;
-}
-.iae-search:focus {
-  border-color: var(--aqua-500);
-  box-shadow: 0 0 0 4px rgba(20,184,166,0.12);
-}
-.iae-list {
-  max-height: 400px;
-  overflow-y: auto;
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  -webkit-overflow-scrolling: touch;
-}
-.iae-item {
-  padding: 11px 16px;
-  border-bottom: 1px solid var(--border-soft);
-  font-size: 13.5px;
-  cursor: pointer;
-  display: flex;
-  gap: 12px;
-  transition: background 0.15s;
-}
-.iae-item:hover { background: var(--paper-warm); }
-.iae-item:last-child { border: none; }
-.iae-code {
-  font-weight: 700;
-  color: var(--gold-700);
-  min-width: 50px;
-  font-size: 12px;
-  padding-top: 1px;
-  font-family: 'Fraunces', serif;
-}
-.iae-name { flex: 1; line-height: 1.45; }
-.iae-tip-text { font-size: 11.5px; color: var(--ink-mute); margin-top: 2px; }
-.iae-detail {
-  background: linear-gradient(135deg, var(--aqua-50), #d8f2ec);
-  padding: 14px 18px;
-  font-size: 13.5px;
-  color: var(--aqua-900);
-  margin-bottom: 1rem;
-  display: none;
-  line-height: 1.65;
-  border-radius: 8px;
-  border-left: 3px solid var(--aqua-500);
-}
-
-/* ============ FACTURA ============ */
-.inv-box {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-.inv-hd {
-  background: linear-gradient(135deg, var(--aqua-900), var(--aqua-700));
-  color: var(--white);
-  padding: 1.15rem 1.5rem;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: 'Fraunces', serif;
-  letter-spacing: -0.01em;
-  position: relative;
-}
-.inv-hd::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold-300), var(--gold-500));
-}
-.inv-body { padding: 1.5rem; }
-.inv-row { display: flex; gap: 14px; margin-bottom: 0.85rem; flex-wrap: wrap; }
-.inv-group { flex: 1; min-width: 130px; }
-.inv-label {
-  font-size: 11px;
-  color: var(--ink-mute);
-  margin-bottom: 4px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.inv-input {
-  width: 100%;
-  padding: 9px 12px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  font-size: 13px;
-  font-family: inherit;
-  color: var(--ink);
-  background: var(--white);
-  transition: all 0.2s;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.inv-input:focus {
-  outline: none;
-  border-color: var(--aqua-500);
-  box-shadow: 0 0 0 3px rgba(20,184,166,0.12);
-}
-.inv-preview {
-  background: var(--paper-warm);
-  border-radius: 10px;
-  padding: 1.25rem 1.35rem;
-  margin-top: 1rem;
-  font-size: 12.5px;
-  border: 1px dashed var(--border);
-}
-.inv-tr { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
-.inv-tr span:first-child { color: var(--ink-mute); }
-.inv-tr.total {
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--aqua-700);
-  border-top: 2px solid var(--border);
-  margin-top: 6px;
-  padding-top: 9px;
-}
-
-/* ============ ERRORES ============ */
-.err-grid { display: grid; gap: 0.85rem; }
-.err-item {
-  display: flex;
-  gap: 14px;
-  padding: 1rem 1.25rem;
-  background: var(--white);
-  border-radius: 10px;
-  border-left: 3px solid #c9634a;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
-}
-.err-item:hover { box-shadow: var(--shadow-md); transform: translateX(3px); }
-.err-num {
-  font-size: 20px;
-  font-weight: 700;
-  color: #c9634a;
-  min-width: 28px;
-  line-height: 1.1;
-  font-family: 'Fraunces', serif;
-}
-.err-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
-.err-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
-.err-fix { font-size: 12px; color: var(--aqua-700); margin-top: 6px; font-weight: 500; }
-
-/* ============ TRUCOS ============ */
-.trick-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.85rem;
-}
-.trick {
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  padding: 1rem 1.15rem;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.trick::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: linear-gradient(90deg, var(--gold-500), var(--aqua-500));
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.trick:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.trick:hover::before { opacity: 1; }
-.trick-title { font-size: 13.5px; font-weight: 600; margin-bottom: 4px; }
-.trick-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
-
-/* ============ CALCULADORA ============ */
-.calc-row { display: flex; align-items: center; gap: 14px; margin-bottom: 0.85rem; flex-wrap: wrap; }
-.calc-label { font-size: 13px; color: var(--ink-soft); min-width: 185px; font-weight: 500; }
-.calc-res {
-  background: linear-gradient(135deg, var(--paper-warm), var(--gold-50));
-  border-radius: 10px;
-  padding: 1.25rem 1.35rem;
-  margin-top: 1.25rem;
-  border: 1px solid var(--border-soft);
-}
-.calc-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13.5px;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--border-soft);
-}
-.calc-line:last-child {
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--aqua-700);
-  margin-top: 6px;
-  padding-top: 10px;
-  border-top: 2px solid var(--gold-300);
-}
-.calc-line span:first-child { color: var(--ink-soft); }
-
-/* ============ CHECKLIST ============ */
-.ch-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--border-soft);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.ch-item:hover { background: var(--paper-warm); margin: 0 -1rem; padding: 11px 1rem; border-radius: 6px; }
-.ch-item:last-child { border: none; }
-.ch-box {
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid var(--border);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-  font-size: 12px;
-  background: var(--white);
-  transition: all 0.2s;
-}
-.ch-box.done {
-  background: linear-gradient(135deg, var(--aqua-500), var(--aqua-700));
-  border-color: var(--aqua-700);
-  color: var(--white);
-  box-shadow: 0 2px 6px rgba(20,184,166,0.3);
-}
-.ch-text { font-size: 13.5px; line-height: 1.55; }
-.ch-text.done { text-decoration: line-through; color: var(--ink-mute); }
-.prog-bar {
-  height: 6px;
-  background: var(--border-soft);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0.75rem;
-}
-.prog-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold-500), var(--aqua-500));
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
-.prog-lbl { font-size: 12.5px; color: var(--ink-mute); margin-bottom: 8px; font-weight: 500; }
-
-/* ============ CHAT IA ============ */
-.chat-box {
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow: var(--shadow-md);
-}
-.chat-msgs {
-  min-height: 220px;
-  max-height: 380px;
-  overflow-y: auto;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  background: var(--paper-warm);
-  -webkit-overflow-scrolling: touch;
-}
-.msg {
-  max-width: 82%;
-  padding: 11px 15px;
-  font-size: 13.5px;
-  line-height: 1.65;
-  border-radius: 14px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.msg.user {
-  align-self: flex-end;
-  background: linear-gradient(135deg, var(--aqua-700), var(--aqua-500));
-  color: var(--white);
-  border-radius: 14px 14px 3px 14px;
-  box-shadow: 0 2px 8px rgba(20,184,166,0.25);
-}
-.msg.bot {
-  align-self: flex-start;
-  background: var(--white);
-  border: 1px solid var(--border-soft);
-  border-radius: 14px 14px 14px 3px;
-  box-shadow: var(--shadow-sm);
-}
-.msg.typing { color: var(--ink-mute); font-style: italic; }
-.chat-input-row {
-  display: flex;
-  gap: 10px;
-  padding: 1rem;
-  border-top: 1px solid var(--border-soft);
-  background: var(--white);
-}
-.chat-input {
-  flex: 1;
-  padding: 11px 16px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  font-size: 13.5px;
-  background: var(--paper-warm);
-  color: var(--ink);
-  outline: none;
-  font-family: inherit;
-  transition: all 0.2s;
-  min-width: 0;
-  -webkit-appearance: none;
-}
-.chat-input:focus {
-  border-color: var(--aqua-500);
-  background: var(--white);
-  box-shadow: 0 0 0 3px rgba(20,184,166,0.12);
-}
-.chat-send {
-  padding: 11px 22px;
-  background: linear-gradient(135deg, var(--aqua-700), var(--aqua-500));
-  color: var(--white);
-  border: none;
-  border-radius: 24px;
-  font-size: 13.5px;
-  cursor: pointer;
-  font-weight: 600;
-  font-family: inherit;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(20,184,166,0.25);
-  white-space: nowrap;
-  -webkit-tap-highlight-color: transparent;
-}
-.chat-send:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(20,184,166,0.35); }
-.chat-send:active { transform: translateY(0); }
-.quick-qs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid var(--border-soft);
-  background: var(--white);
-}
-.quick-q {
-  font-size: 11.5px;
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  cursor: pointer;
-  background: var(--white);
-  color: var(--ink-soft);
-  font-family: inherit;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.quick-q:hover { background: var(--aqua-50); border-color: var(--aqua-300); color: var(--aqua-700); }
-
-/* ============ MODOS IA ============ */
-.modo-btn {
-  padding: 10px 18px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--white);
-  color: var(--ink-soft);
-  font-size: 13px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.25s ease;
-  font-weight: 500;
-  -webkit-tap-highlight-color: transparent;
-}
-.modo-btn:hover { border-color: var(--aqua-500); color: var(--aqua-700); background: var(--aqua-50); }
-.modo-btn.active {
-  background: linear-gradient(135deg, var(--aqua-700), var(--aqua-500));
-  color: var(--white);
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(20,184,166,0.3);
-}
-
-/* ============ MODELOS ============ */
-.models-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 0.75rem;
-}
-.model-item {
-  padding: 0.85rem 1rem;
-  background: var(--paper-warm);
-  border-radius: 8px;
-  border-left: 3px solid var(--gold-500);
-  transition: all 0.25s;
-}
-.model-item:hover { background: var(--gold-50); }
-.model-code {
-  font-weight: 700;
-  color: var(--gold-700);
-  font-size: 12.5px;
-  margin-bottom: 3px;
-  font-family: 'Fraunces', serif;
-}
-.model-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.45; }
-
-/* ============ CUOTA CERO ============ */
-.cc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 0.75rem;
-}
-.cc-item {
-  padding: 11px 15px;
-  background: var(--white);
-  border-radius: 8px;
-  border-left: 3px solid var(--aqua-500);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.25s;
-}
-.cc-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.cc-name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
-.cc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; margin-top: 4px; }
-
-/* ============ TABLA ============ */
-.tabla-reta-wrap {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  margin: 1rem 0;
-}
-.tabla-reta {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12.5px;
-  min-width: 480px;
-}
-.tabla-reta th {
-  background: linear-gradient(135deg, var(--aqua-900), var(--aqua-700));
-  color: var(--white);
-  padding: 11px 14px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-.tabla-reta td { padding: 9px 14px; border-bottom: 1px solid var(--border-soft); background: var(--white); }
-.tabla-reta tr:nth-child(even) td { background: var(--paper-warm); }
-.tabla-reta tr:hover td { background: var(--gold-50); }
-
-/* ============ BANNER DE COOKIES ============ */
-#cookie-banner {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  box-shadow: 0 -8px 32px rgba(26,31,46,0.12);
-  padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
-  z-index: 900;
-  animation: slideUp 0.4s ease;
-}
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-#cookie-banner.visible { display: block; }
-.cookie-inner { max-width: 1100px; margin: 0 auto; }
-.cookie-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--ink);
-}
-.cookie-text {
-  font-size: 13px;
-  line-height: 1.65;
-  color: var(--ink-soft);
-  margin-bottom: 1rem;
-}
-.cookie-text a { color: var(--aqua-700); text-decoration: underline; }
-.cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-.cookie-btn {
-  padding: 11px 22px;
-  border-radius: 8px;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-  -webkit-tap-highlight-color: transparent;
-}
-.cookie-btn-accept {
-  background: linear-gradient(135deg, var(--aqua-700), var(--aqua-500));
-  color: var(--white);
-  box-shadow: 0 2px 8px rgba(20,184,166,0.25);
-}
-.cookie-btn-accept:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(20,184,166,0.35); }
-.cookie-btn-reject {
-  background: var(--white);
-  color: var(--ink);
-  border: 1px solid var(--border);
-}
-.cookie-btn-reject:hover { background: var(--paper-warm); }
-.cookie-btn-config {
-  background: var(--white);
-  color: var(--aqua-700);
-  border: 1px solid var(--aqua-300);
-}
-.cookie-btn-config:hover { background: var(--aqua-50); }
-
-/* PANEL DE CONFIGURACIÓN */
-#cookie-panel {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(26,31,46,0.5);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  z-index: 950;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-#cookie-panel.visible { display: flex; }
-.cookie-panel-content {
-  background: var(--white);
-  border-radius: 14px;
-  max-width: 640px;
-  width: 100%;
-  max-height: 88vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(26,31,46,0.25);
-  animation: fadeSlide 0.3s ease;
-}
-.cookie-panel-header {
-  padding: 1.5rem 1.75rem 1rem;
-  border-bottom: 1px solid var(--border-soft);
-  position: sticky;
-  top: 0;
-  background: var(--white);
-  border-radius: 14px 14px 0 0;
-  z-index: 1;
-}
-.cookie-panel-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-.cookie-panel-sub { font-size: 12.5px; color: var(--ink-mute); }
-.cookie-panel-body { padding: 1.25rem 1.75rem; }
-.cookie-cat {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-soft);
-}
-.cookie-cat:last-child { border-bottom: none; }
-.cookie-cat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-.cookie-cat-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-.cookie-cat-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
-.cookie-toggle {
-  position: relative;
-  width: 44px;
-  height: 24px;
-  background: var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s;
-  border: none;
-  padding: 0;
-}
-.cookie-toggle.on { background: var(--aqua-500); }
-.cookie-toggle::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--white);
-  top: 3px;
-  left: 3px;
-  transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-.cookie-toggle.on::after { transform: translateX(20px); }
-.cookie-toggle.disabled { opacity: 0.5; cursor: not-allowed; }
-.cookie-panel-footer {
-  padding: 1rem 1.75rem 1.5rem;
-  border-top: 1px solid var(--border-soft);
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  position: sticky;
-  bottom: 0;
-  background: var(--white);
-  border-radius: 0 0 14px 14px;
-}
-
-/* ============ FOOTER ============ */
-footer {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  border-top: 1px solid var(--border-soft);
-  font-size: 12.5px;
-  color: var(--ink-mute);
-  margin-top: 4rem;
-  background: var(--paper-warm);
-  padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
-}
-footer strong { color: var(--ink); font-family: 'Fraunces', serif; font-size: 14px; }
-footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
-
-/* ============ RESPONSIVE ============ */
-@media (max-width: 900px) {
-  .sidebar { display: none; }
-  .menu-toggle { display: flex; }
-  .layout { flex-direction: column; }
-  .content { max-width: 100%; }
-  .section { padding: 1.75rem 1.15rem 3rem; }
-  .hero { padding: 3.5rem 1.5rem 2.5rem; }
-  .hero h1 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
-  .cal-grid, .sim-cols, .trick-grid, .cc-grid, .models-grid { grid-template-columns: 1fr; }
-  .sim-label, .calc-label { min-width: 100%; font-size: 14px; margin-bottom: 4px; }
-  .fi { width: 100%; font-size: 15px; padding: 11px 13px; }
-  .section-title { font-size: 1.4rem; }
-  body { font-size: 15.5px; }
-  .msg { max-width: 92%; font-size: 14px; }
-  .inv-row { flex-direction: column; gap: 10px; }
-  .inv-group { min-width: 100%; }
-  .chat-input { font-size: 15px; padding: 12px 16px; }
-  .chat-send { padding: 12px 20px; font-size: 14px; }
-  .quick-q { font-size: 12.5px; padding: 7px 14px; }
-  .modo-btn { font-size: 14px; padding: 12px 16px; width: 100%; }
-  .card { padding: 1.25rem 1.15rem; }
-  .inv-body { padding: 1.15rem; }
-  .tabla-reta th, .tabla-reta td { padding: 10px 12px; font-size: 13px; }
-  .tabla-reta { min-width: 520px; }
-}
-
-@media (max-width: 600px) {
-  #cookie-banner { padding: 1.25rem 1rem calc(1.25rem + env(safe-area-inset-bottom)); }
-  .cookie-buttons { flex-direction: column; }
-  .cookie-btn { width: 100%; text-align: center; padding: 13px 22px; font-size: 14.5px; }
-  .cookie-panel-content { max-height: 92vh; border-radius: 10px; }
-  .cookie-panel-header { padding: 1.25rem 1.25rem 0.85rem; }
-  .cookie-panel-body { padding: 1rem 1.25rem; }
-  .cookie-panel-footer { padding: 1rem 1.25rem 1.25rem; }
-  .cookie-panel-footer .cookie-btn { width: 100%; }
-}
-
-@media (max-width: 480px) {
-  .hero { padding: 3rem 1.15rem 2rem; }
-  .section { padding: 1.5rem 0.9rem 2.5rem; }
-  .card { padding: 1.1rem 1rem; }
-  .section-title { font-size: 1.25rem; }
-  .hero h1 { font-size: 1.65rem; }
-  .hero p { font-size: 0.92rem; }
-}
-</style>
-</head>
-<body>
-
-<!-- Botón menú móvil -->
-<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" onclick="abrirDrawer()">☰</button>
-
-<!-- Drawer móvil -->
-<div class="drawer-overlay" id="drawer-overlay" onclick="cerrarDrawer()"></div>
-<aside class="drawer" id="drawer">
-  <div class="drawer-header">
-    <span class="drawer-title">Autónomo sin drama</span>
-    <button class="drawer-close" onclick="cerrarDrawer()" aria-label="Cerrar menú">×</button>
-  </div>
-  <nav class="drawer-nav">
-    <button class="drawer-item active" onclick="showTab('alta',this)">Alta paso a paso</button>
-    <button class="drawer-item" onclick="showTab('tarifa',this)">Tarifa plana y Cuota Cero</button>
-    <button class="drawer-item" onclick="showTab('calendario',this)">Calendario fiscal</button>
-    <button class="drawer-item" onclick="showTab('simulador',this)">Autónomo vs SL</button>
-    <button class="drawer-item" onclick="showTab('iae',this)">Epígrafes IAE</button>
-    <button class="drawer-item" onclick="showTab('factura',this)">Primera factura</button>
-    <button class="drawer-item" onclick="showTab('errores',this)">10 errores típicos</button>
-    <button class="drawer-item" onclick="showTab('trucos',this)">Deducciones</button>
-    <button class="drawer-item" onclick="showTab('calc',this)">Calculadora de neto</button>
-    <button class="drawer-item" onclick="showTab('checklist',this)">Checklist</button>
-    <button class="drawer-item" onclick="showTab('ia',this)">Pregunta a la IA</button>
-    <div class="sidebar-divider" style="margin:1rem 1.25rem;"></div>
-    <button class="drawer-item" onclick="showTab('aviso-legal',this)">Aviso Legal</button>
-    <button class="drawer-item" onclick="showTab('privacidad',this)">Política de Privacidad</button>
-    <button class="drawer-item" onclick="showTab('cookies',this)">Política de Cookies</button>
-  </nav>
-</aside>
-
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <span class="brand">Autónomo <span class="accent">sin drama</span></span>
-    </div>
-    <nav class="sidebar-nav">
-      <button class="sidebar-item active" onclick="showTab('alta',this)">Alta paso a paso</button>
-      <button class="sidebar-item" onclick="showTab('tarifa',this)">Tarifa plana y Cuota Cero</button>
-      <button class="sidebar-item" onclick="showTab('calendario',this)">Calendario fiscal</button>
-      <button class="sidebar-item" onclick="showTab('simulador',this)">Autónomo vs SL</button>
-      <button class="sidebar-item" onclick="showTab('iae',this)">Epígrafes IAE</button>
-      <button class="sidebar-item" onclick="showTab('factura',this)">Primera factura</button>
-      <button class="sidebar-item" onclick="showTab('errores',this)">10 errores típicos</button>
-      <button class="sidebar-item" onclick="showTab('trucos',this)">Deducciones</button>
-      <button class="sidebar-item" onclick="showTab('calc',this)">Calculadora de neto</button>
-      <button class="sidebar-item" onclick="showTab('checklist',this)">Checklist</button>
-      <button class="sidebar-item" onclick="showTab('ia',this)">Pregunta a la IA</button>
-      <div class="sidebar-divider"></div>
-      <button class="sidebar-item" onclick="showTab('aviso-legal',this)">Aviso Legal</button>
-      <button class="sidebar-item" onclick="showTab('privacidad',this)">Política de Privacidad</button>
-      <button class="sidebar-item" onclick="showTab('cookies',this)">Política de Cookies</button>
-    </nav>
-  </aside>
-
-  <main class="content">
-    <div class="hero">
-      <div class="hero-inner">
-        <span class="hero-badge">Guía completa · España 2026</span>
-        <h1>Autónomo <span class="accent">sin drama</span></h1>
-        <p>Todo lo que necesitas para darte de alta, pagar lo mínimo legal y sobrevivir a Hacienda. Sin jerga, sin sorpresas, sin sustos.</p>
-      </div>
-    </div>
-
-    <!-- ALTA -->
-    <div id="tab-alta" class="section active">
-      <p class="section-title">Cómo darse de alta como autónomo</p>
-      <p class="section-sub">El orden correcto · España 2026</p>
-      <div class="alert alert-green">Tarifa plana 2026: 80€/mes el primer año (≈88,64€ con MEI). Si tus ingresos son menores al SMI (1.221€/mes) puedes prorrogarla otros 12 meses. Consulta la pestaña <strong>Tarifa plana y Cuota Cero</strong> para las ayudas de tu comunidad.</div>
-      <div class="card">
-        <div class="step-card"><div class="step-num">Paso 1 · Primero de todo</div><div class="step-title">Elige tu epígrafe IAE <span class="badge badge-blue">Ver pestaña IAE</span></div><div class="step-desc">El IAE define tu actividad ante Hacienda y determina qué gastos puedes deducir. Elige uno amplio que cubra todo lo que haces hoy y lo que podrías hacer mañana. Las personas físicas autónomas están exentas del pago del IAE.</div><div class="step-tip">Puedes tener más de un epígrafe sin coste adicional.</div></div>
-        <div class="step-card"><div class="step-num">Paso 2 · Antes de facturar</div><div class="step-title">Alta en Hacienda · Modelo 036 <span class="badge badge-green">Gratis</span></div><div class="step-desc">El 036 es el modelo único desde la eliminación del 037 en febrero de 2025. Se presenta en la Sede Electrónica de la AEAT. Indica tu epígrafe IAE, régimen de IVA y si vas por estimación directa simplificada.</div><div class="step-tip">Esto va ANTES de emitir tu primera factura. Hacerlo después es una infracción tributaria.</div></div>
-        <div class="step-card"><div class="step-num">Paso 3 · El mismo día que empiezas</div><div class="step-title">Alta en el RETA · Seguridad Social <span class="badge badge-amber">Crítico</span></div><div class="step-desc">El alta debe coincidir con el día en que empiezas a ejercer. Se tramita en la Tesorería General de la SS o por internet con certificado digital. Cotizas por ingresos reales según la tabla de tramos de 2026.</div><div class="step-tip">Solicita la tarifa plana de 80€/mes al darte de alta. Solo disponible si no has sido autónomo en los últimos 2 años.</div></div>
-        <div class="step-card"><div class="step-num">Paso 4 · Decide</div><div class="step-title">Régimen de IVA e IRPF</div><div class="step-desc">IVA: régimen general (lo más habitual), recargo de equivalencia (comerciantes minoristas), o exención si tu actividad lo permite (sanidad, educación). IRPF: estimación directa simplificada es lo más común para empezar.</div><div class="step-tip">Si más del 70% de tus facturas llevan retención de IRPF (trabajas con empresas), probablemente no tengas que presentar el Modelo 130.</div></div>
-        <div class="step-card"><div class="step-num">Paso 5 · Desde el primer día</div><div class="step-title">Organiza facturas y libros contables <span class="badge badge-amber">Obligatorio</span></div><div class="step-desc">Libro de ingresos, libro de gastos y libro de bienes de inversión. No necesitas ser contable, pero sí registrar y conservar cada factura. Hacienda puede pedírtelos en cualquier momento durante 5 años.</div><div class="step-tip">Holded, Quipu, Billin o Suma son herramientas económicas que automatizan los libros contables.</div></div>
-        <div class="step-card"><div class="step-num">Paso 6 · Cada trimestre</div><div class="step-title">Declaraciones trimestrales</div><div class="step-desc">Modelo 303 (IVA) y Modelo 130 (pago fraccionado IRPF si aplica). Los meses clave son enero, abril, julio y octubre. La declaración anual de la Renta consolida todo cada primavera.</div><div class="step-tip">El recargo mínimo por presentar fuera de plazo es el 10%. No vale la pena arriesgarse.</div></div>
-      </div>
-    </div>
-
-    <!-- TARIFA PLANA Y CUOTA CERO -->
-    <div id="tab-tarifa" class="section">
-      <p class="section-title">Tarifa plana y Cuota Cero</p>
-      <p class="section-sub">Lo que puedes ahorrar en tu primer año · España 2026</p>
-
-      <div class="alert alert-green">La tarifa plana estatal es de <strong>80€/mes</strong> (más 0,9% MEI, total ≈88,64€/mes) durante los primeros 12 meses. Si tus rendimientos netos son inferiores al SMI (1.221€/mes en 2026), puedes solicitar una <strong>prórroga por otros 12 meses</strong>.</div>
-
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">¿Quién puede solicitar la tarifa plana?</div>
-        <div class="step-card" style="border-left-color:var(--gold-500);"><div class="step-desc">
-          1. No haber estado dado de alta como autónomo en los <strong>últimos 2 años</strong> (3 años si ya disfrutaste de la tarifa plana antes).<br>
-          2. No ser administrador de una sociedad ni autónomo colaborador.<br>
-          3. Estar al corriente de pagos con Hacienda y Seguridad Social.<br>
-          4. Darse de alta en el RETA durante 2026.
-        </div></div>
-      </div>
-
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">Casos especiales: duración ampliada</div>
-        <div class="trick-grid">
-          <div class="trick"><div class="trick-title">Discapacidad ≥33%</div><div class="trick-desc">24 meses iniciales + 36 meses de prórroga si los ingresos son inferiores al SMI. Total: hasta <strong>5 años</strong> a cuota reducida.</div></div>
-          <div class="trick"><div class="trick-title">Víctimas de violencia de género</div><div class="trick-desc">Misma ampliación: 24 + 36 meses. Se reconoce la cuota reducida durante todo el periodo si se acredita bajo rendimiento.</div></div>
-          <div class="trick"><div class="trick-title">Víctimas de terrorismo</div><div class="trick-desc">Idéntico tratamiento: 24 meses iniciales, prorrogables otros 36. La solicitud se gestiona igual a través de Import@ss.</div></div>
-          <div class="trick"><div class="trick-title">Reincorporación tras maternidad/paternidad</div><div class="trick-desc">Si cesaste por nacimiento, adopción o acogimiento y vuelves a la actividad en los 2 años siguientes, tienes <strong>24 meses</strong> de bonificación.</div></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">Cuota Cero por comunidad autónoma</div>
-        <div class="alert alert-amber">Hasta <strong>12 comunidades</strong> devuelven el 100% de la tarifa plana en 2026. El coste real de tu RETA puede ser <strong>0€</strong> durante el primer año. Cada comunidad tiene sus propios requisitos y plazos.</div>
-        <div class="cc-grid">
-          <div class="cc-item"><div class="cc-name">Madrid</div><div class="cc-desc">Hasta 24 meses. Subvenciona el 100% si los ingresos no superan el SMI.</div></div>
-          <div class="cc-item"><div class="cc-name">Andalucía</div><div class="cc-desc">Primer año 100%. Prorrogable al segundo si los ingresos finales no superan el SMI.</div></div>
-          <div class="cc-item"><div class="cc-name">Canarias</div><div class="cc-desc">Reembolsa las cuotas (≈960€/año). Ampliable a 24 meses para colectivos vulnerables.</div></div>
-          <div class="cc-item"><div class="cc-name">Murcia</div><div class="cc-desc">Cubre la cuota reducida hasta 2 años. En 2025 la ayuda alcanzaba 2.920€ por 24 meses.</div></div>
-          <div class="cc-item"><div class="cc-name">Extremadura</div><div class="cc-desc">12 meses ampliables a 24 si se cumplen requisitos de renta.</div></div>
-          <div class="cc-item"><div class="cc-name">Castilla-La Mancha</div><div class="cc-desc">Tarifa Plana Plus: 960€ el primer año y otros 960€ el segundo. Convocatoria retroactiva.</div></div>
-          <div class="cc-item"><div class="cc-name">Aragón</div><div class="cc-desc">Hasta 960€ del primer año de cuotas. Incentivos adicionales en zonas rurales.</div></div>
-          <div class="cc-item"><div class="cc-name">Cantabria</div><div class="cc-desc">100% de las cotizaciones el primer año. Prorrogable un segundo año si ingresos &lt; SMI.</div></div>
-          <div class="cc-item"><div class="cc-name">Galicia</div><div class="cc-desc">Ayudas para nuevos autónomos residentes. Sectores estratégicos: tecnológico y rural.</div></div>
-          <div class="cc-item"><div class="cc-name">Castilla y León</div><div class="cc-desc">Programas que asumen el 100% de la tarifa de 80€ al menos el primer año.</div></div>
-          <div class="cc-item"><div class="cc-name">La Rioja</div><div class="cc-desc">Cobertura del 100% durante al menos el primer año para nuevos autónomos.</div></div>
-          <div class="cc-item"><div class="cc-name">Asturias</div><div class="cc-desc">Programa de cuota cero para nuevos autónomos que cumplan requisitos.</div></div>
-        </div>
-        <div class="alert alert-blue" style="margin-top:1rem;font-size:12.5px;">La solicitud se presenta online en la sede electrónica de tu comunidad. Se requiere: DNI/NIE, empadronamiento, certificado de alta en RETA, vida laboral, declaración de ingresos y no tener deudas con SS ni Hacienda. La ayuda suele ser retroactiva.</div>
-      </div>
-
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">Tabla completa de cuotas RETA 2026</div>
-        <p style="font-size:12.5px;color:var(--ink-mute);margin-bottom:0.75rem;">Base mínima y cuota mínima por tramo de rendimiento neto mensual.</p>
-        <div class="tabla-reta-wrap">
-          <table class="tabla-reta">
-            <thead><tr><th>Tramo</th><th>Rendimiento neto (€/mes)</th><th>Base mínima (€)</th><th>Cuota mínima (€/mes)</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>≤ 670</td><td>653,59</td><td><strong>205</strong></td></tr>
-              <tr><td>2</td><td>670 – 900</td><td>718,95</td><td>226</td></tr>
-              <tr><td>3</td><td>900 – 1.166,70</td><td>849,67</td><td>267</td></tr>
-              <tr><td>4</td><td>1.166,70 – 1.300</td><td>950,98</td><td>299</td></tr>
-              <tr><td>5</td><td>1.300 – 1.500</td><td>960,78</td><td>302</td></tr>
-              <tr><td>6</td><td>1.500 – 1.700</td><td>960,78</td><td>302</td></tr>
-              <tr><td>7</td><td>1.700 – 1.850</td><td>1.143,79</td><td>360</td></tr>
-              <tr><td>8</td><td>1.850 – 2.030</td><td>1.209,15</td><td>380</td></tr>
-              <tr><td>9</td><td>2.030 – 2.330</td><td>1.274,51</td><td>401</td></tr>
-              <tr><td>10</td><td>2.330 – 2.760</td><td>1.356,21</td><td>427</td></tr>
-              <tr><td>11</td><td>2.760 – 3.190</td><td>1.437,91</td><td>452</td></tr>
-              <tr><td>12</td><td>3.190 – 3.620</td><td>1.519,61</td><td>478</td></tr>
-              <tr><td>13</td><td>3.620 – 4.050</td><td>1.601,31</td><td>504</td></tr>
-              <tr><td>14</td><td>4.050 – 6.000</td><td>1.732,03</td><td>545</td></tr>
-              <tr><td>15</td><td>&gt; 6.000</td><td>1.928,10</td><td>607</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="alert alert-blue" style="margin-top:1rem;font-size:12.5px;">Puedes cambiar tu base de cotización hasta <strong>6 veces al año</strong> para adaptarla a la evolución real de tu negocio. El MEI (0,9% en 2026) ya está incluido en las cuotas.</div>
-      </div>
-    </div>
-
-    <!-- CALENDARIO -->
-    <div id="tab-calendario" class="section">
-      <p class="section-title">Calendario fiscal 2026</p>
-      <p class="section-sub">Fechas clave para autónomos · Actualizado</p>
-      <div class="alert alert-amber" id="alert-proximo-plazo"></div>
-      <div class="cal-grid">
-        <div class="cal-month">
-          <div class="cal-header q1">Enero 2026</div>
-          <div class="cal-event"><div class="cal-date">Hasta 20 ene</div><div class="cal-desc"><strong>Mod. 111/115</strong> · Retenciones 4T<br><strong>Mod. 130</strong> · IRPF 4T</div></div>
-          <div class="cal-event"><div class="cal-date">Hasta 30 ene</div><div class="cal-desc"><strong>Mod. 303</strong> · IVA 4T<br><strong>Mod. 390</strong> · Resumen anual IVA</div></div>
-        </div>
-        <div class="cal-month">
-          <div class="cal-header past">Febrero 2026</div>
-          <div class="cal-event"><div class="cal-date">Hasta 28 feb</div><div class="cal-desc"><strong>Mod. 347</strong> · Operaciones &gt;3.005€<br><strong>Mod. 190</strong> · Resumen retenciones</div></div>
-        </div>
-        <div class="cal-month">
-          <div class="cal-header q2">Abril 2026</div>
-          <div class="cal-event"><div class="cal-date">Hasta 20 abr</div><div class="cal-desc"><strong>Mod. 303</strong> · IVA 1T<br><strong>Mod. 130</strong> · IRPF 1T</div></div>
-          <div class="cal-event"><div class="cal-date">8 abr – 30 jun</div><div class="cal-desc"><strong>Renta 2025</strong> · Declaración anual IRPF</div></div>
-        </div>
-        <div class="cal-month">
-          <div class="cal-header q3">Julio 2026</div>
-          <div class="cal-event"><div class="cal-date">Hasta 20 jul</div><div class="cal-desc"><strong>Mod. 303</strong> · IVA 2T<br><strong>Mod. 130</strong> · IRPF 2T</div></div>
-        </div>
-        <div class="cal-month">
-          <div class="cal-header q4">Octubre 2026</div>
-          <div class="cal-event"><div class="cal-date">Hasta 20 oct</div><div class="cal-desc"><strong>Mod. 303</strong> · IVA 3T<br><strong>Mod. 130</strong> · IRPF 3T</div></div>
-        </div>
-        <div class="cal-month">
-          <div class="cal-header q1">Enero 2027</div>
-          <div class="cal-event"><div class="cal-date">Hasta 20 ene</div><div class="cal-desc"><strong>Mod. 303</strong> · IVA 4T 2026<br><strong>Mod. 130</strong> · IRPF 4T 2026</div></div>
-          <div class="cal-event"><div class="cal-date">Hasta 30 ene</div><div class="cal-desc"><strong>Mod. 390</strong> · Resumen anual IVA 2026</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">Modelos que todo autónomo debe conocer</div>
-        <div class="models-grid">
-          <div class="model-item"><div class="model-code">Mod. 036</div><div class="model-desc">Alta, baja o modificación en el censo de Hacienda</div></div>
-          <div class="model-item"><div class="model-code">Mod. 303</div><div class="model-desc">Declaración trimestral del IVA</div></div>
-          <div class="model-item"><div class="model-code">Mod. 130</div><div class="model-desc">Pago fraccionado trimestral del IRPF</div></div>
-          <div class="model-item"><div class="model-code">Mod. 390</div><div class="model-desc">Resumen anual del IVA (enero)</div></div>
-          <div class="model-item"><div class="model-code">Mod. 100</div><div class="model-desc">Declaración anual de la Renta (abr–jun)</div></div>
-          <div class="model-item"><div class="model-code">Mod. 111</div><div class="model-desc">Retenciones trimestrales a trabajadores</div></div>
-          <div class="model-item"><div class="model-code">Mod. 115</div><div class="model-desc">Retenciones trimestrales por alquileres</div></div>
-          <div class="model-item"><div class="model-code">Mod. 347</div><div class="model-desc">Operaciones con terceros &gt;3.005€/año</div></div>
-          <div class="model-item"><div class="model-code">Mod. 349</div><div class="model-desc">Operaciones intracomunitarias</div></div>
-          <div class="model-item"><div class="model-code">Mod. 190</div><div class="model-desc">Resumen anual de retenciones (enero)</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SIMULADOR -->
-    <div id="tab-simulador" class="section">
-      <p class="section-title">¿Autónomo o Sociedad Limitada?</p>
-      <p class="section-sub">Compara cuál te conviene con números reales</p>
-      <div class="card">
-        <div class="sim-row"><span class="sim-label">Facturación anual estimada (€)</span><input class="fi" type="number" id="s-factura" value="40000" oninput="simular()" inputmode="decimal"></div>
-        <div class="sim-row"><span class="sim-label">Gastos deducibles anuales (€)</span><input class="fi" type="number" id="s-gastos" value="5000" oninput="simular()" inputmode="decimal"></div>
-        <div class="sim-row"><span class="sim-label">Salario que te pagarías en SL (€)</span><input class="fi" type="number" id="s-salario" value="20000" oninput="simular()" inputmode="decimal"></div>
-        <div class="sim-cols" id="sim-result"></div>
-        <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;" id="sim-rec"></div>
-      </div>
-      <div class="card">
-        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">Cuándo conviene cada opción</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;font-size:13px;">
-          <div><strong style="color:var(--aqua-700);">Autónomo si:</strong><br><br>· Facturas menos de 50.000–60.000€/año<br>· Quieres simplicidad y bajo coste<br>· Estás empezando y necesitas flexibilidad<br>· No necesitas separar patrimonio</div>
-          <div><strong style="color:var(--gold-700);">SL si:</strong><br><br>· El beneficio supera 60.000–80.000€/año<br>· Quieres proteger tu patrimonio personal<br>· Tienes socios o quieres inversión<br>· El IS (25%) te sale mejor que tu tramo</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- IAE -->
-    <div id="tab-iae" class="section">
-      <p class="section-title">Epígrafes IAE más comunes</p>
-      <p class="section-sub">Busca tu actividad · Elige el más amplio posible</p>
-      <div class="alert alert-blue">Las personas físicas autónomas están exentas del pago del IAE. El epígrafe solo identifica tu actividad ante Hacienda.</div>
-      <input class="iae-search" id="iae-search" placeholder="Busca: diseño, programación, fontanero, peluquería, consultoría..." oninput="filtrarIAE()" type="search">
-      <div class="iae-detail" id="iae-detail"></div>
-      <div class="iae-list" id="iae-list"></div>
-    </div>
-
-    <!-- FACTURA -->
-    <div id="tab-factura" class="section">
-      <p class="section-title">Generador de primera factura</p>
-      <p class="section-sub">Rellena los campos y obtén el resumen de tu factura legal</p>
-      <div class="alert alert-amber">Toda factura en España debe incluir: número correlativo, fecha, NIF del emisor, datos del receptor, descripción, base imponible, tipo de IVA, cuota de IVA y total.</div>
-      <div class="inv-box">
-        <div class="inv-hd">Datos de tu factura</div>
-        <div class="inv-body">
-          <div class="inv-row">
-            <div class="inv-group"><div class="inv-label">Tu nombre o razón social</div><input class="inv-input" id="i-nombre" placeholder="María García López" oninput="previewFactura()"></div>
-            <div class="inv-group"><div class="inv-label">Tu NIF/DNI</div><input class="inv-input" id="i-nif" placeholder="12345678A" oninput="previewFactura()"></div>
-          </div>
-          <div class="inv-row">
-            <div class="inv-group"><div class="inv-label">Tu dirección</div><input class="inv-input" id="i-dir" placeholder="Calle Mayor 1, 28001 Madrid" oninput="previewFactura()"></div>
-            <div class="inv-group"><div class="inv-label">Número de factura</div><input class="inv-input" id="i-num" placeholder="2026-001" oninput="previewFactura()"></div>
-          </div>
-          <div class="inv-row">
-            <div class="inv-group"><div class="inv-label">Nombre del cliente</div><input class="inv-input" id="i-cliente" placeholder="Empresa S.L." oninput="previewFactura()"></div>
-            <div class="inv-group"><div class="inv-label">NIF del cliente</div><input class="inv-input" id="i-cnif" placeholder="B12345678" oninput="previewFactura()"></div>
-          </div>
-          <div class="inv-row">
-            <div class="inv-group"><div class="inv-label">Descripción del servicio</div><input class="inv-input" id="i-desc" placeholder="Diseño web y maquetación" oninput="previewFactura()"></div>
-            <div class="inv-group"><div class="inv-label">Fecha de emisión</div><input class="inv-input" type="date" id="i-fecha" oninput="previewFactura()"></div>
-          </div>
-          <div class="inv-row">
-            <div class="inv-group"><div class="inv-label">Base imponible (€)</div><input class="inv-input" type="number" id="i-base" placeholder="1000" oninput="previewFactura()" inputmode="decimal"></div>
-            <div class="inv-group"><div class="inv-label">% IVA</div>
-              <select class="inv-input" id="i-iva" onchange="previewFactura()">
-                <option value="21">21% · general</option>
-                <option value="10">10% · reducido</option>
-                <option value="4">4% · superreducido</option>
-                <option value="0">0% · exento</option>
-              </select>
-            </div>
-            <div class="inv-group"><div class="inv-label">% Retención IRPF</div>
-              <select class="inv-input" id="i-ret" onchange="previewFactura()">
-                <option value="0">Sin retención</option>
-                <option value="15">15% · general</option>
-                <option value="7">7% · nuevos autónomos</option>
-              </select>
-            </div>
-          </div>
-          <div class="inv-preview" id="inv-preview"><span style="font-size:12.5px;color:var(--ink-mute);">Rellena los campos para ver el resumen de tu factura</span></div>
-          <div class="alert alert-green" style="margin-top:1rem;font-size:12.5px;">Si es tu primer año como autónomo puedes aplicar la retención reducida del 7%. Escribe en la factura: <em>"Tipo de retención reducida por inicio de actividad profesional"</em>.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ERRORES -->
-    <div id="tab-errores" class="section">
-      <p class="section-title">Los 10 errores que comete todo el mundo</p>
-      <p class="section-sub">Aprende de los fallos ajenos · Cada uno puede costarte dinero real</p>
-      <div class="err-grid">
-        <div class="err-item"><div class="err-num">1</div><div><div class="err-title">Darse de alta en el RETA después de empezar a trabajar</div><div class="err-desc">El alta debe ser el mismo día que empiezas. Un día de retraso puede generar multa y recargo de cuotas atrasadas.</div><div class="err-fix">✓ Alta en RETA = primer día de actividad, sin excepción.</div></div></div>
-        <div class="err-item"><div class="err-num">2</div><div><div class="err-title">Confundir ingresos con beneficios al calcular el IRPF</div><div class="err-desc">El IRPF se paga sobre el beneficio neto (ingresos menos gastos), no sobre todo lo que factura.</div><div class="err-fix">✓ Reserva siempre el 25–30% de tus beneficios para impuestos.</div></div></div>
-        <div class="err-item"><div class="err-num">3</div><div><div class="err-title">No guardar las facturas de gastos</div><div class="err-desc">Sin factura (el ticket no vale) no puedes deducir el gasto. Hacienda puede reclamarte el IVA deducido sin respaldo.</div><div class="err-fix">✓ Escanea cada factura el mismo día que la recibes. Consérvala 5 años.</div></div></div>
-        <div class="err-item"><div class="err-num">4</div><div><div class="err-title">Olvidar la declaración trimestral</div><div class="err-desc">El recargo empieza en el 10% y sube hasta el 20% pasados 12 meses, más intereses de demora.</div><div class="err-fix">✓ Pon alarmas el 1 de enero, abril, julio y octubre.</div></div></div>
-        <div class="err-item"><div class="err-num">5</div><div><div class="err-title">Mezclar cuentas personales y del negocio</div><div class="err-desc">Sin separación contable es imposible demostrar qué es gasto profesional. Hacienda puede rechazar deducciones enteras.</div><div class="err-fix">✓ Abre una cuenta bancaria exclusiva para el negocio desde el día uno.</div></div></div>
-        <div class="err-item"><div class="err-num">6</div><div><div class="err-title">Deducir gastos que Hacienda no acepta</div><div class="err-desc">Ropa normal, comidas sin justificación, el coche sin prueba de uso exclusivo… En inspección te los revertirán.</div><div class="err-fix">✓ Solo deduce lo vinculado directamente a tu actividad y que puedas demostrar.</div></div></div>
-        <div class="err-item"><div class="err-num">7</div><div><div class="err-title">No obtener el certificado digital antes de empezar</div><div class="err-desc">Sin identificación digital no puedes tramitar nada online con Hacienda ni con la Seguridad Social.</div><div class="err-fix">✓ Saca el certificado de la FNMT antes de empezar. Es gratis pero tarda unos días.</div></div></div>
-        <div class="err-item"><div class="err-num">8</div><div><div class="err-title">No ajustar la base de cotización RETA cuando ingresas más</div><div class="err-desc">Si ganas más de lo declarado al inicio, la Seguridad Social te regularizará al año siguiente y deberás pagar la diferencia de golpe.</div><div class="err-fix">✓ Puedes cambiar tu base hasta 6 veces al año. Revísala cada trimestre.</div></div></div>
-        <div class="err-item"><div class="err-num">9</div><div><div class="err-title">Facturar sin IVA cuando deberías incluirlo</div><div class="err-desc">Si tu actividad no está exenta de IVA y no lo cobras, tendrás que pagarlo de tu propio bolsillo al presentar el Mod. 303.</div><div class="err-fix">✓ Verifica si tu actividad lleva IVA antes de emitir tu primera factura.</div></div></div>
-        <div class="err-item"><div class="err-num">10</div><div><div class="err-title">No contratar seguro de responsabilidad civil</div><div class="err-desc">Si causas un daño a un cliente en el ejercicio de tu actividad, respondes con todo tu patrimonio personal.</div><div class="err-fix">✓ La prima suele ser 150–400€/año y es 100% deducible.</div></div></div>
-      </div>
-    </div>
-
-    <!-- TRUCOS -->
-    <div id="tab-trucos" class="section">
-      <p class="section-title">Gastos deducibles · No le regales dinero a Hacienda</p>
-      <p class="section-sub">Solo con factura, a tu nombre y vinculados a tu actividad</p>
-      <div class="alert alert-red">Sin factura no hay deducción. El ticket no vale. La factura debe incluir tu NIF, la base imponible y el IVA desglosado.</div>
-      <div class="trick-grid">
-        <div class="trick"><div class="trick-title">Cuota RETA</div><div class="trick-desc">100% deducible en IRPF. Son entre 2.700 y 4.800€/año que reducen tu base imponible.</div></div>
-        <div class="trick"><div class="trick-title">Despacho en casa</div><div class="trick-desc">% de luz, gas, internet y comunidad proporcional a los m² del espacio de trabajo sobre el total. Ejemplo: 10m² de 80m² = 12,5%.</div></div>
-        <div class="trick"><div class="trick-title">Teléfono e internet</div><div class="trick-desc">50% si usas la misma línea para todo. 100% si tienes línea exclusiva de trabajo.</div></div>
-        <div class="trick"><div class="trick-title">Formación</div><div class="trick-desc">Cursos, libros, suscripciones a software y herramientas relacionadas con tu actividad. 100% deducibles.</div></div>
-        <div class="trick"><div class="trick-title">Equipos y material</div><div class="trick-desc">Ordenador, monitor, teclado, software. Si cuesta más de 300€ se amortiza en varios años.</div></div>
-        <div class="trick"><div class="trick-title">Comidas de trabajo</div><div class="trick-desc">Máx. 26,67€/día. Día laborable, pago con tarjeta, factura completa. Debes poder justificar el motivo comercial.</div></div>
-        <div class="trick"><div class="trick-title">Seguros y comisiones</div><div class="trick-desc">Seguro de responsabilidad civil profesional: 100% deducible. Comisiones bancarias de la cuenta de empresa también.</div></div>
-        <div class="trick"><div class="trick-title">Viajes de trabajo</div><div class="trick-desc">Vuelos, hotel, transporte vinculados a una actividad comercial concreta. Siempre con factura y justificación.</div></div>
-        <div class="trick"><div class="trick-title">Vehículo (terreno pantanoso)</div><div class="trick-desc">Hacienda lo tumba sin prueba sólida de uso exclusivo profesional. Si lo usas también para uso personal, el riesgo es alto.</div></div>
-      </div>
-    </div>
-
-    <!-- CALCULADORA -->
-    <div id="tab-calc" class="section">
-      <p class="section-title">Calculadora de neto real</p>
-      <p class="section-sub">Cuánto te queda después de impuestos y cuotas · 2026</p>
-      <div class="card">
-        <div class="calc-row"><span class="calc-label">Ingresos brutos anuales (€)</span><input class="fi" type="number" id="ingresos" value="30000" oninput="calcular()" inputmode="decimal"></div>
-        <div class="calc-row"><span class="calc-label">Gastos deducibles anuales (€)</span><input class="fi" type="number" id="gastos" value="4000" oninput="calcular()" inputmode="decimal"></div>
-        <div class="calc-row"><span class="calc-label">Cuota RETA mensual (€)</span><input class="fi" type="number" id="cuota" value="205" oninput="calcular()" inputmode="decimal"></div>
-        <div class="calc-row"><span class="calc-label">Tarifa plana activa</span>
-          <select class="fi" id="tarifa" onchange="calcular()">
-            <option value="0">No</option>
-            <option value="1">Sí · 80€/mes (primer año)</option>
-          </select>
-        </div>
-        <div class="calc-res">
-          <div class="calc-line"><span>Ingresos brutos</span><span id="r-brutos"></span></div>
-          <div class="calc-line"><span>Gastos deducibles</span><span id="r-gastos"></span></div>
-          <div class="calc-line"><span>Cuota RETA anual</span><span id="r-reta"></span></div>
-          <div class="calc-line"><span>Base imponible IRPF</span><span id="r-base"></span></div>
-          <div class="calc-line"><span>IRPF estimado</span><span id="r-irpf"></span></div>
-          <div class="calc-line"><span>Neto final estimado</span><span id="r-neto"></span></div>
-        </div>
-        <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;">Estimación orientativa. Tu situación personal (mínimo vital, mínimos familiares, deducciones autonómicas) puede modificar el resultado.</div>
-      </div>
-    </div>
-
-    <!-- CHECKLIST -->
-    <div id="tab-checklist" class="section">
-      <p class="section-title">Checklist del nuevo autónomo</p>
-      <p class="section-sub">Marca cada paso que hayas completado</p>
-      <div class="card">
-        <div class="prog-lbl" id="prog-lbl">0 de 16 completados</div>
-        <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
-        <div id="checklist"></div>
-      </div>
-    </div>
-
-    <!-- IA -->
-    <div id="tab-ia" class="section">
-      <p class="section-title">Pregunta lo que sea</p>
-      <p class="section-sub">IA especializada en autónomos, impuestos y deducciones · España 2026</p>
-
-      <div class="card" style="margin-bottom:1.25rem;">
-        <div style="font-size:14px;font-weight:600;margin-bottom:0.85rem;font-family:'Fraunces',serif;">Elige tu modo de IA</div>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
-          <button class="modo-btn active" id="modo-local" onclick="cambiarModo('local')">IA Local · gratis, sin configuración</button>
-          <button class="modo-btn" id="modo-groq" onclick="cambiarModo('groq')">IA en la nube · Groq, tu propia clave</button>
-        </div>
-        <div id="modo-aviso" style="font-size:12.5px;color:var(--ink-mute);margin-top:0.75rem;"></div>
-      </div>
-
-      <div class="card" id="groq-config" style="display:none;margin-bottom:1.25rem;">
-        <div style="font-size:14px;font-weight:600;margin-bottom:0.5rem;font-family:'Fraunces',serif;">Tu clave de Groq</div>
-        <p style="font-size:12.5px;color:var(--ink-mute);margin-bottom:0.75rem;">Obtén una gratis en <a href="https://console.groq.com" target="_blank" style="color:var(--aqua-700);">console.groq.com</a>. Se guarda solo en tu navegador.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <input class="chat-input" id="groq-key" type="password" placeholder="gsk_..." style="flex:1;min-width:200px;">
-          <button class="chat-send" onclick="guardarClaveGroq()">Guardar clave</button>
-        </div>
-        <div id="groq-estado" style="font-size:12.5px;margin-top:0.6rem;"></div>
-      </div>
-
-      <div class="chat-box">
-        <div class="chat-msgs" id="chat-msgs">
-          <div class="msg bot">¡Hola! Soy tu asesor virtual de autónomos. Elige el modo de IA arriba y pregúntame lo que quieras sobre el alta, impuestos, deducciones o la tarifa plana.</div>
-        </div>
-        <div id="modelo-progress" style="display:none;padding:0.6rem 1rem;font-size:12.5px;color:var(--ink-mute);background:var(--gold-50);border-top:1px solid var(--border-soft);"></div>
-        <div class="chat-input-row">
-          <input class="chat-input" id="chat-input" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')sendMsg()">
-          <button class="chat-send" onclick="sendMsg()">Enviar</button>
-        </div>
-        <div class="quick-qs">
-          <button class="quick-q" onclick="askQuick('¿Cuánto pagaré de IRPF si facturo 35.000€ con 5.000€ de gastos en 2026?')">IRPF con 35k€</button>
-          <button class="quick-q" onclick="askQuick('¿Cómo solicito la tarifa plana de 80€/mes en 2026?')">Tarifa plana</button>
-          <button class="quick-q" onclick="askQuick('¿Qué comunidades ofrecen cuota cero en 2026?')">Cuota cero</button>
-          <button class="quick-q" onclick="askQuick('¿Puedo deducir el alquiler si trabajo desde casa?')">Deducir alquiler</button>
-          <button class="quick-q" onclick="askQuick('¿Me conviene ser autónomo o crear una SL si voy a facturar 60.000€?')">¿Autónomo o SL?</button>
-          <button class="quick-q" onclick="askQuick('¿Qué epígrafe IAE debo elegir si soy diseñador gráfico freelance?')">IAE diseñador</button>
-        </div>
-      </div>
-    </div>
 
     <!-- AVISO LEGAL -->
     <div id="tab-aviso-legal" class="section">
       <p class="section-title">Aviso Legal</p>
       <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. Datos identificativos del titular</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se facilitan a continuación los siguientes datos:</p>
@@ -1609,18 +15,15 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <li><strong>Nombre del sitio web:</strong> Autónomo sin drama</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Condiciones de uso</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">El acceso y uso de este sitio web atribuye la condición de usuario e implica la aceptación plena y sin reservas de todas y cada una de las condiciones incluidas en este Aviso Legal.</p>
         <p style="font-size:13.5px;line-height:1.7;">El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que Arnaldo Bermúdez ofrece a través de este sitio web, absteniéndose de emplearlos para incurrir en actividades ilícitas o contrarias a la buena fe y al ordenamiento legal, o que puedan causar daños o perjuicios a los derechos e intereses de terceros.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Propiedad intelectual e industrial</div>
         <p style="font-size:13.5px;line-height:1.7;">Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseño, estructura, código fuente, etc.) son propiedad de Arnaldo Bermúdez o de terceros que han autorizado su uso, y están protegidos por los derechos de propiedad intelectual e industrial. Queda expresamente prohibida la reproducción, distribución, comunicación pública y transformación total o parcial de los contenidos sin la autorización expresa y por escrito del titular.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Limitación de responsabilidad</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">Arnaldo Bermúdez no se responsabiliza de:</p>
@@ -1630,12 +33,10 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <li>La disponibilidad técnica del servicio, aunque se adoptan las medidas razonables para garantizarla.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Enlaces a terceros</div>
         <p style="font-size:13.5px;line-height:1.7;">Este sitio web puede contener enlaces a páginas web de terceros. Arnaldo Bermúdez no se responsabiliza del contenido de dichos sitios ni de las políticas de privacidad que puedan aplicar.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Legislación aplicable y jurisdicción</div>
         <p style="font-size:13.5px;line-height:1.7;">Las presentes condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales de Sevilla.</p>
@@ -1646,7 +47,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
     <div id="tab-privacidad" class="section">
       <p class="section-title">Política de Privacidad</p>
       <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. Responsable del tratamiento</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD), se informa de que el responsable del tratamiento de los datos personales recogidos en este sitio web es:</p>
@@ -1658,40 +58,21 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <li><strong>Teléfono:</strong> <a href="tel:+34600385615" style="color:var(--aqua-700);">600 385 615</a></li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Datos que recogemos y finalidad</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">Este sitio web <strong>no recoge datos personales de forma activa</strong> a través de formularios de contacto, registro o suscripción. Sin embargo, determinadas funcionalidades pueden implicar un tratamiento de datos:</p>
         <div class="tabla-reta-wrap">
           <table class="tabla-reta" style="min-width:600px;">
-            <thead>
-              <tr><th>Función</th><th>Datos tratados</th><th>Finalidad</th><th>Base jurídica</th></tr>
-            </thead>
+            <thead><tr><th>Función</th><th>Datos tratados</th><th>Finalidad</th><th>Base jurídica</th></tr></thead>
             <tbody>
-              <tr>
-                <td>Modo Groq (IA en la nube)</td>
-                <td>Clave API de Groq introducida por el usuario</td>
-                <td>Permitir al usuario usar la IA de Groq con su propia clave</td>
-                <td>Consentimiento del usuario (art. 6.1.a RGPD)</td>
-              </tr>
-              <tr>
-                <td>Almacenamiento local del navegador</td>
-                <td>Preferencias de cookies, estado del checklist, modo de IA</td>
-                <td>Recordar las preferencias del usuario entre visitas</td>
-                <td>Consentimiento (cookies) / interés legítimo (checklist)</td>
-              </tr>
-              <tr>
-                <td>Google Fonts</td>
-                <td>Dirección IP</td>
-                <td>Carga de las tipografías del sitio</td>
-                <td>Interés legítimo (necesario para la visualización)</td>
-              </tr>
+              <tr><td>Modo Groq (IA en la nube)</td><td>Clave API de Groq introducida por el usuario</td><td>Permitir al usuario usar la IA de Groq con su propia clave</td><td>Consentimiento del usuario (art. 6.1.a RGPD)</td></tr>
+              <tr><td>Almacenamiento local del navegador</td><td>Preferencias de cookies, estado del checklist, modo de IA</td><td>Recordar las preferencias del usuario entre visitas</td><td>Consentimiento (cookies) / interés legítimo (checklist)</td></tr>
+              <tr><td>Google Fonts</td><td>Dirección IP</td><td>Carga de las tipografías del sitio</td><td>Interés legítimo (necesario para la visualización)</td></tr>
             </tbody>
           </table>
         </div>
         <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;"><strong>Importante:</strong> La clave API de Groq <strong>nunca se envía a nuestros servidores</strong>. Se almacena únicamente en el navegador del usuario (localStorage) y se usa directamente para comunicarse con la API de Groq.</div>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Plazo de conservación</div>
         <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
@@ -1700,14 +81,12 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <li><strong>Estado del checklist:</strong> se conserva en el navegador del usuario hasta que este lo borre o desmarque todas las casillas.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Destinatarios y transferencias internacionales</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;"><strong>Groq:</strong> si el usuario utiliza el modo "IA en la nube", la clave API y el contenido de las consultas se envían directamente a Groq, Inc. (Estados Unidos) para procesar la respuesta. El usuario consiente expresamente esta transferencia al activar dicho modo.</p>
         <p style="font-size:13.5px;line-height:1.7;"><strong>Google Fonts:</strong> las tipografías se cargan desde servidores de Google LLC (Estados Unidos). Google recibe la dirección IP del usuario al cargar la página.</p>
         <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">No se realizan otras cesiones de datos a terceros salvo obligación legal.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Derechos del usuario</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">El usuario tiene derecho a:</p>
@@ -1723,17 +102,14 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
         <p style="font-size:13.5px;line-height:1.7;margin-top:1rem;">Para ejercer estos derechos, puede dirigirse por escrito a <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a>, adjuntando copia de su DNI o documento identificativo equivalente.</p>
         <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" style="color:var(--aqua-700);">www.aepd.es</a>) si considera que el tratamiento no se ajusta a la normativa vigente.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Seguridad</div>
         <p style="font-size:13.5px;line-height:1.7;">Arnaldo Bermúdez adopta las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">7. Menores de edad</div>
         <p style="font-size:13.5px;line-height:1.7;">Este sitio web no está dirigido a menores de 14 años. No recogemos conscientemente datos de menores.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">8. Cambios en la política de privacidad</div>
         <p style="font-size:13.5px;line-height:1.7;">Nos reservamos el derecho a modificar la presente política para adaptarla a novedades legislativas o jurisprudenciales. En caso de cambios sustanciales, se notificará a los usuarios a través del sitio web.</p>
@@ -1744,12 +120,10 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
     <div id="tab-cookies" class="section">
       <p class="section-title">Política de Cookies</p>
       <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. ¿Qué son las cookies?</div>
         <p style="font-size:13.5px;line-height:1.7;">Una cookie es un fichero que se descarga en su dispositivo al acceder a determinadas páginas web. Las cookies permiten a la página web almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo, y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Tipos de cookies que utilizamos</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;"><strong>Según quién las gestione:</strong></p>
@@ -1765,14 +139,11 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <li><strong>De terceros:</strong> Google Fonts (tipografías), Groq (solo si el usuario introduce su clave).</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Cookies utilizadas en detalle</div>
         <div class="tabla-reta-wrap">
           <table class="tabla-reta" style="min-width:640px;">
-            <thead>
-              <tr><th>Nombre</th><th>Titular</th><th>Finalidad</th><th>Duración</th><th>Tipo</th></tr>
-            </thead>
+            <thead><tr><th>Nombre</th><th>Titular</th><th>Finalidad</th><th>Duración</th><th>Tipo</th></tr></thead>
             <tbody>
               <tr><td><code>cookies_consent</code></td><td>Propia</td><td>Almacena la elección del usuario sobre cookies</td><td>Hasta que el usuario la borre</td><td>Técnica</td></tr>
               <tr><td><code>groq_api_key</code></td><td>Propia</td><td>Almacena la clave de Groq introducida por el usuario</td><td>Hasta que el usuario la borre</td><td>Técnica</td></tr>
@@ -1783,7 +154,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
         </div>
         <div class="alert alert-blue" style="margin-top:1rem;font-size:12.5px;">Este sitio <strong>no utiliza cookies de análisis, publicidad ni seguimiento</strong>.</div>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Consentimiento</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">Al acceder por primera vez a este sitio web, se muestra un banner informativo donde el usuario puede:</p>
@@ -1795,7 +165,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
         <p style="font-size:13.5px;line-height:1.7;margin-top:1rem;">El usuario puede retirar su consentimiento en cualquier momento a través del panel de configuración de cookies, accesible desde el footer del sitio.</p>
         <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">El consentimiento tendrá una duración máxima de <strong>24 meses</strong>, tras los cuales se volverá a solicitar.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Cómo eliminar o bloquear cookies</div>
         <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">El usuario puede configurar su navegador para bloquear o eliminar cookies. Enlaces a las instrucciones de los navegadores más comunes:</p>
@@ -1807,17 +176,14 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
         </ul>
         <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;">Si bloquea las cookies técnicas, algunas funcionalidades del sitio podrían no funcionar correctamente.</div>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Transferencias internacionales</div>
         <p style="font-size:13.5px;line-height:1.7;">Al utilizar el modo "IA en la nube (Groq)", el usuario consiente que sus consultas y su clave API se transfieran a Groq, Inc. (Estados Unidos), que actúa como encargado del tratamiento bajo las garantías del Marco de Privacidad de Datos UE-EE. UU. o cláusulas contractuales tipo. Google Fonts carga tipografías desde servidores de Google LLC (Estados Unidos). Google recibe la dirección IP del usuario al cargar la página.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">7. Actualizaciones</div>
         <p style="font-size:13.5px;line-height:1.7;">Esta Política de Cookies puede actualizarse en función de cambios normativos o técnicos. Se recomienda al usuario revisarla periódicamente.</p>
       </div>
-
       <div class="card">
         <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">8. Contacto</div>
         <p style="font-size:13.5px;line-height:1.7;">Para cualquier duda sobre esta Política de Cookies, puede contactar en <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a>.</p>
@@ -1841,7 +207,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
   <p style="margin-top:1rem;font-size:11.5px;">© 2026 Arnaldo Bermúdez · NIF Z3681288M · Todos los derechos reservados</p>
 </footer>
 
-<!-- BANNER DE COOKIES (primera capa) -->
 <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
   <div class="cookie-inner">
     <div class="cookie-title">Tu privacidad nos importa</div>
@@ -1857,7 +222,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
   </div>
 </div>
 
-<!-- PANEL DE CONFIGURACIÓN (segunda capa) -->
 <div id="cookie-panel" role="dialog" aria-modal="true" aria-label="Configuración de cookies">
   <div class="cookie-panel-content">
     <div class="cookie-panel-header">
@@ -1865,7 +229,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
       <div class="cookie-panel-sub">Elige qué categorías de cookies quieres permitir.</div>
     </div>
     <div class="cookie-panel-body">
-
       <div class="cookie-cat">
         <div class="cookie-cat-row">
           <div>
@@ -1875,7 +238,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <button class="cookie-toggle on disabled" disabled aria-label="Cookies técnicas (siempre activas)"></button>
         </div>
       </div>
-
       <div class="cookie-cat">
         <div class="cookie-cat-row">
           <div>
@@ -1885,7 +247,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <button class="cookie-toggle on" id="toggle-personalizacion" onclick="toggleCat('personalizacion')" aria-label="Cookies de personalización"></button>
         </div>
       </div>
-
       <div class="cookie-cat">
         <div class="cookie-cat-row">
           <div>
@@ -1895,7 +256,6 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
           <button class="cookie-toggle on" id="toggle-terceros" onclick="toggleCat('terceros')" aria-label="Cookies de terceros"></button>
         </div>
       </div>
-
     </div>
     <div class="cookie-panel-footer">
       <button class="cookie-btn cookie-btn-accept" onclick="guardarConfigCookies()">Guardar preferencias</button>
@@ -2209,11 +569,9 @@ function guardarClaveGroq() {
 async function cargarModeloLocal() {
   if (engine || cargandoModelo) return engine;
   cargandoModelo = true;
-
   const progressEl = document.getElementById('modelo-progress');
   progressEl.style.display = 'block';
   progressEl.textContent = 'Cargando motor de IA local...';
-
   try {
     const webllm = await import('https://esm.run/@mlc-ai/web-llm');
     engine = await webllm.CreateMLCEngine(
@@ -2261,10 +619,8 @@ function construirMensajes() {
 
 async function askAI(msg) {
   addTyping();
-
   try {
     let respuesta = '';
-
     if (modoActual === 'local') {
       if (!navigator.gpu) {
         removeTyping();
@@ -2313,7 +669,6 @@ async function askAI(msg) {
       const data = await res.json();
       respuesta = data.choices?.[0]?.message?.content || '';
     }
-
     removeTyping();
     if (respuesta) {
       addMsg('bot', respuesta);
@@ -2352,7 +707,7 @@ function removeTyping() {
 }
 
 // ==========================================
-// GESTIÓN DE COOKIES (LSSI + RGPD + AEPD)
+// GESTIÓN DE COOKIES
 // ==========================================
 const COOKIE_CONSENT_KEY = 'cookies_consent';
 const COOKIE_CONSENT_VERSION = 1;
@@ -2467,9 +822,21 @@ if (claveGuardada) {
   document.getElementById('groq-estado').textContent = 'Clave guardada.';
   document.getElementById('groq-estado').style.color = 'var(--aqua-700)';
 }
-cambiarModo('local');
 
-// Wrapper para guardar el modo de IA solo si personalización está aceptada
+// Detectar soporte WebGPU y preseleccionar modo
+if (!navigator.gpu) {
+  cambiarModo('groq');
+  document.getElementById('modo-local').classList.remove('active');
+  document.getElementById('modo-groq').classList.add('active');
+  document.getElementById('groq-config').style.display = 'block';
+  document.getElementById('modo-aviso').innerHTML =
+    'Tu navegador no soporta IA local (WebGPU no disponible). Hemos activado el modo Groq automáticamente. Introduce tu clave arriba para empezar.';
+  document.getElementById('modo-aviso').style.color = '#c9634a';
+} else {
+  cambiarModo('local');
+}
+
+// Wrapper para guardar el modo de IA si personalización está aceptada
 const _cambiarModoOriginal = cambiarModo;
 cambiarModo = function(modo) {
   _cambiarModoOriginal(modo);
