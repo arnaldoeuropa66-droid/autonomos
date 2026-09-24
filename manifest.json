@@ -1,0 +1,28 @@
+{
+  "name": "Autónomo sin drama · Guía España 2026",
+  "short_name": "Autónomo",
+  "description": "Guía completa para autónomos en España: alta, impuestos, deducciones y calendario fiscal 2026.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fdfbf7",
+  "theme_color": "#0d7377",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["finance", "productivity", "education"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
