@@ -135,6 +135,11 @@ body {
   font-weight: 600;
 }
 .sidebar-item.active::before { height: 60%; }
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 0.75rem 1.25rem;
+}
 
 .content { flex: 1; padding: 0; max-width: 1100px; margin: 0 auto; }
 
@@ -966,6 +971,164 @@ body {
 .tabla-reta tr:nth-child(even) td { background: var(--paper-warm); }
 .tabla-reta tr:hover td { background: var(--gold-50); }
 
+/* ============ BANNER DE COOKIES ============ */
+#cookie-banner {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 32px rgba(26,31,46,0.12);
+  padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
+  z-index: 900;
+  animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+#cookie-banner.visible { display: block; }
+.cookie-inner { max-width: 1100px; margin: 0 auto; }
+.cookie-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.cookie-text {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+.cookie-text a { color: var(--aqua-700); text-decoration: underline; }
+.cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-btn {
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.cookie-btn-accept {
+  background: linear-gradient(135deg, var(--aqua-700), var(--aqua-500));
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(20,184,166,0.25);
+}
+.cookie-btn-accept:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(20,184,166,0.35); }
+.cookie-btn-reject {
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.cookie-btn-reject:hover { background: var(--paper-warm); }
+.cookie-btn-config {
+  background: var(--white);
+  color: var(--aqua-700);
+  border: 1px solid var(--aqua-300);
+}
+.cookie-btn-config:hover { background: var(--aqua-50); }
+
+/* PANEL DE CONFIGURACIÓN */
+#cookie-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,31,46,0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 950;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+#cookie-panel.visible { display: flex; }
+.cookie-panel-content {
+  background: var(--white);
+  border-radius: 14px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(26,31,46,0.25);
+  animation: fadeSlide 0.3s ease;
+}
+.cookie-panel-header {
+  padding: 1.5rem 1.75rem 1rem;
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  border-radius: 14px 14px 0 0;
+  z-index: 1;
+}
+.cookie-panel-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.cookie-panel-sub { font-size: 12.5px; color: var(--ink-mute); }
+.cookie-panel-body { padding: 1.25rem 1.75rem; }
+.cookie-cat {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.cookie-cat:last-child { border-bottom: none; }
+.cookie-cat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.cookie-cat-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.cookie-cat-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+.cookie-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
+}
+.cookie-toggle.on { background: var(--aqua-500); }
+.cookie-toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--white);
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.cookie-toggle.on::after { transform: translateX(20px); }
+.cookie-toggle.disabled { opacity: 0.5; cursor: not-allowed; }
+.cookie-panel-footer {
+  padding: 1rem 1.75rem 1.5rem;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  border-radius: 0 0 14px 14px;
+}
+
 /* ============ FOOTER ============ */
 footer {
   text-align: center;
@@ -1007,6 +1170,17 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
   .tabla-reta { min-width: 520px; }
 }
 
+@media (max-width: 600px) {
+  #cookie-banner { padding: 1.25rem 1rem calc(1.25rem + env(safe-area-inset-bottom)); }
+  .cookie-buttons { flex-direction: column; }
+  .cookie-btn { width: 100%; text-align: center; padding: 13px 22px; font-size: 14.5px; }
+  .cookie-panel-content { max-height: 92vh; border-radius: 10px; }
+  .cookie-panel-header { padding: 1.25rem 1.25rem 0.85rem; }
+  .cookie-panel-body { padding: 1rem 1.25rem; }
+  .cookie-panel-footer { padding: 1rem 1.25rem 1.25rem; }
+  .cookie-panel-footer .cookie-btn { width: 100%; }
+}
+
 @media (max-width: 480px) {
   .hero { padding: 3rem 1.15rem 2rem; }
   .section { padding: 1.5rem 0.9rem 2.5rem; }
@@ -1041,6 +1215,10 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
     <button class="drawer-item" onclick="showTab('calc',this)">Calculadora de neto</button>
     <button class="drawer-item" onclick="showTab('checklist',this)">Checklist</button>
     <button class="drawer-item" onclick="showTab('ia',this)">Pregunta a la IA</button>
+    <div class="sidebar-divider" style="margin:1rem 1.25rem;"></div>
+    <button class="drawer-item" onclick="showTab('aviso-legal',this)">Aviso Legal</button>
+    <button class="drawer-item" onclick="showTab('privacidad',this)">Política de Privacidad</button>
+    <button class="drawer-item" onclick="showTab('cookies',this)">Política de Cookies</button>
   </nav>
 </aside>
 
@@ -1061,6 +1239,10 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
       <button class="sidebar-item" onclick="showTab('calc',this)">Calculadora de neto</button>
       <button class="sidebar-item" onclick="showTab('checklist',this)">Checklist</button>
       <button class="sidebar-item" onclick="showTab('ia',this)">Pregunta a la IA</button>
+      <div class="sidebar-divider"></div>
+      <button class="sidebar-item" onclick="showTab('aviso-legal',this)">Aviso Legal</button>
+      <button class="sidebar-item" onclick="showTab('privacidad',this)">Política de Privacidad</button>
+      <button class="sidebar-item" onclick="showTab('cookies',this)">Política de Cookies</button>
     </nav>
   </aside>
 
@@ -1409,13 +1591,319 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
         </div>
       </div>
     </div>
+
+    <!-- AVISO LEGAL -->
+    <div id="tab-aviso-legal" class="section">
+      <p class="section-title">Aviso Legal</p>
+      <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. Datos identificativos del titular</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se facilitan a continuación los siguientes datos:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Titular:</strong> Arnaldo Bermúdez</li>
+          <li><strong>NIF:</strong> Z3681288M</li>
+          <li><strong>Domicilio:</strong> Sevilla, España</li>
+          <li><strong>Correo electrónico:</strong> <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a></li>
+          <li><strong>Teléfono:</strong> <a href="tel:+34600385615" style="color:var(--aqua-700);">600 385 615</a></li>
+          <li><strong>Nombre del sitio web:</strong> Autónomo sin drama</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Condiciones de uso</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">El acceso y uso de este sitio web atribuye la condición de usuario e implica la aceptación plena y sin reservas de todas y cada una de las condiciones incluidas en este Aviso Legal.</p>
+        <p style="font-size:13.5px;line-height:1.7;">El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que Arnaldo Bermúdez ofrece a través de este sitio web, absteniéndose de emplearlos para incurrir en actividades ilícitas o contrarias a la buena fe y al ordenamiento legal, o que puedan causar daños o perjuicios a los derechos e intereses de terceros.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Propiedad intelectual e industrial</div>
+        <p style="font-size:13.5px;line-height:1.7;">Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseño, estructura, código fuente, etc.) son propiedad de Arnaldo Bermúdez o de terceros que han autorizado su uso, y están protegidos por los derechos de propiedad intelectual e industrial. Queda expresamente prohibida la reproducción, distribución, comunicación pública y transformación total o parcial de los contenidos sin la autorización expresa y por escrito del titular.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Limitación de responsabilidad</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">Arnaldo Bermúdez no se responsabiliza de:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li>Los daños y perjuicios de cualquier naturaleza que puedan derivarse del acceso o uso del sitio web.</li>
+          <li>La exactitud, veracidad o actualidad de los contenidos. La información fiscal y legal publicada tiene carácter meramente orientativo y no constituye asesoramiento profesional.</li>
+          <li>La disponibilidad técnica del servicio, aunque se adoptan las medidas razonables para garantizarla.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Enlaces a terceros</div>
+        <p style="font-size:13.5px;line-height:1.7;">Este sitio web puede contener enlaces a páginas web de terceros. Arnaldo Bermúdez no se responsabiliza del contenido de dichos sitios ni de las políticas de privacidad que puedan aplicar.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Legislación aplicable y jurisdicción</div>
+        <p style="font-size:13.5px;line-height:1.7;">Las presentes condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales de Sevilla.</p>
+      </div>
+    </div>
+
+    <!-- POLÍTICA DE PRIVACIDAD -->
+    <div id="tab-privacidad" class="section">
+      <p class="section-title">Política de Privacidad</p>
+      <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. Responsable del tratamiento</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD), se informa de que el responsable del tratamiento de los datos personales recogidos en este sitio web es:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Identidad:</strong> Arnaldo Bermúdez</li>
+          <li><strong>NIF:</strong> Z3681288M</li>
+          <li><strong>Domicilio:</strong> Sevilla, España</li>
+          <li><strong>Correo electrónico:</strong> <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a></li>
+          <li><strong>Teléfono:</strong> <a href="tel:+34600385615" style="color:var(--aqua-700);">600 385 615</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Datos que recogemos y finalidad</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:1rem;">Este sitio web <strong>no recoge datos personales de forma activa</strong> a través de formularios de contacto, registro o suscripción. Sin embargo, determinadas funcionalidades pueden implicar un tratamiento de datos:</p>
+        <div class="tabla-reta-wrap">
+          <table class="tabla-reta" style="min-width:600px;">
+            <thead>
+              <tr><th>Función</th><th>Datos tratados</th><th>Finalidad</th><th>Base jurídica</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Modo Groq (IA en la nube)</td>
+                <td>Clave API de Groq introducida por el usuario</td>
+                <td>Permitir al usuario usar la IA de Groq con su propia clave</td>
+                <td>Consentimiento del usuario (art. 6.1.a RGPD)</td>
+              </tr>
+              <tr>
+                <td>Almacenamiento local del navegador</td>
+                <td>Preferencias de cookies, estado del checklist, modo de IA</td>
+                <td>Recordar las preferencias del usuario entre visitas</td>
+                <td>Consentimiento (cookies) / interés legítimo (checklist)</td>
+              </tr>
+              <tr>
+                <td>Google Fonts</td>
+                <td>Dirección IP</td>
+                <td>Carga de las tipografías del sitio</td>
+                <td>Interés legítimo (necesario para la visualización)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;"><strong>Importante:</strong> La clave API de Groq <strong>nunca se envía a nuestros servidores</strong>. Se almacena únicamente en el navegador del usuario (localStorage) y se usa directamente para comunicarse con la API de Groq.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Plazo de conservación</div>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Clave API de Groq:</strong> se conserva en el navegador del usuario hasta que este la elimine manualmente o borre los datos del navegador.</li>
+          <li><strong>Preferencias de cookies:</strong> máximo 24 meses desde su aceptación.</li>
+          <li><strong>Estado del checklist:</strong> se conserva en el navegador del usuario hasta que este lo borre o desmarque todas las casillas.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Destinatarios y transferencias internacionales</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;"><strong>Groq:</strong> si el usuario utiliza el modo "IA en la nube", la clave API y el contenido de las consultas se envían directamente a Groq, Inc. (Estados Unidos) para procesar la respuesta. El usuario consiente expresamente esta transferencia al activar dicho modo.</p>
+        <p style="font-size:13.5px;line-height:1.7;"><strong>Google Fonts:</strong> las tipografías se cargan desde servidores de Google LLC (Estados Unidos). Google recibe la dirección IP del usuario al cargar la página.</p>
+        <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">No se realizan otras cesiones de datos a terceros salvo obligación legal.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Derechos del usuario</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">El usuario tiene derecho a:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Acceso:</strong> solicitar qué datos personales tratamos.</li>
+          <li><strong>Rectificación:</strong> corregir datos inexactos.</li>
+          <li><strong>Supresión:</strong> solicitar la eliminación de los datos.</li>
+          <li><strong>Limitación:</strong> restringir el tratamiento en determinadas circunstancias.</li>
+          <li><strong>Portabilidad:</strong> recibir los datos en formato estructurado.</li>
+          <li><strong>Oposición:</strong> oponerse al tratamiento por motivos personales.</li>
+          <li><strong>Retirar el consentimiento</strong> en cualquier momento, sin que ello afecte a la licitud del tratamiento previo.</li>
+        </ul>
+        <p style="font-size:13.5px;line-height:1.7;margin-top:1rem;">Para ejercer estos derechos, puede dirigirse por escrito a <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a>, adjuntando copia de su DNI o documento identificativo equivalente.</p>
+        <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" style="color:var(--aqua-700);">www.aepd.es</a>) si considera que el tratamiento no se ajusta a la normativa vigente.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Seguridad</div>
+        <p style="font-size:13.5px;line-height:1.7;">Arnaldo Bermúdez adopta las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">7. Menores de edad</div>
+        <p style="font-size:13.5px;line-height:1.7;">Este sitio web no está dirigido a menores de 14 años. No recogemos conscientemente datos de menores.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">8. Cambios en la política de privacidad</div>
+        <p style="font-size:13.5px;line-height:1.7;">Nos reservamos el derecho a modificar la presente política para adaptarla a novedades legislativas o jurisprudenciales. En caso de cambios sustanciales, se notificará a los usuarios a través del sitio web.</p>
+      </div>
+    </div>
+
+    <!-- POLÍTICA DE COOKIES -->
+    <div id="tab-cookies" class="section">
+      <p class="section-title">Política de Cookies</p>
+      <p class="section-sub">Última actualización: 24 de septiembre de 2026</p>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">1. ¿Qué son las cookies?</div>
+        <p style="font-size:13.5px;line-height:1.7;">Una cookie es un fichero que se descarga en su dispositivo al acceder a determinadas páginas web. Las cookies permiten a la página web almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo, y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">2. Tipos de cookies que utilizamos</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;"><strong>Según quién las gestione:</strong></p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;margin-bottom:1rem;">
+          <li><strong>Cookies propias:</strong> enviadas desde un equipo o dominio gestionado por Arnaldo Bermúdez.</li>
+          <li><strong>Cookies de terceros:</strong> enviadas desde un equipo o dominio no gestionado por nosotros (por ejemplo, Google Fonts o Groq).</li>
+        </ul>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;"><strong>Según su finalidad:</strong></p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Técnicas (necesarias):</strong> permiten la navegación y el funcionamiento básico del sitio. No requieren consentimiento.</li>
+          <li><strong>De personalización:</strong> recuerdan sus preferencias (modo de IA, estado del checklist).</li>
+          <li><strong>Analíticas:</strong> actualmente <strong>no utilizamos cookies analíticas</strong>.</li>
+          <li><strong>De terceros:</strong> Google Fonts (tipografías), Groq (solo si el usuario introduce su clave).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">3. Cookies utilizadas en detalle</div>
+        <div class="tabla-reta-wrap">
+          <table class="tabla-reta" style="min-width:640px;">
+            <thead>
+              <tr><th>Nombre</th><th>Titular</th><th>Finalidad</th><th>Duración</th><th>Tipo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>cookies_consent</code></td><td>Propia</td><td>Almacena la elección del usuario sobre cookies</td><td>Hasta que el usuario la borre</td><td>Técnica</td></tr>
+              <tr><td><code>groq_api_key</code></td><td>Propia</td><td>Almacena la clave de Groq introducida por el usuario</td><td>Hasta que el usuario la borre</td><td>Técnica</td></tr>
+              <tr><td><code>checklist_state</code></td><td>Propia</td><td>Almacena el estado del checklist del autónomo</td><td>Hasta que el usuario lo borre</td><td>Personalización</td></tr>
+              <tr><td><code>modo_ia</code></td><td>Propia</td><td>Almacena el modo de IA seleccionado</td><td>Hasta que el usuario lo borre</td><td>Personalización</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-blue" style="margin-top:1rem;font-size:12.5px;">Este sitio <strong>no utiliza cookies de análisis, publicidad ni seguimiento</strong>.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">4. Consentimiento</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">Al acceder por primera vez a este sitio web, se muestra un banner informativo donde el usuario puede:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><strong>Aceptar todas las cookies</strong></li>
+          <li><strong>Rechazar todas las cookies</strong> (con la misma visibilidad y prominencia que "Aceptar")</li>
+          <li><strong>Configurar</strong> sus preferencias de forma granular</li>
+        </ul>
+        <p style="font-size:13.5px;line-height:1.7;margin-top:1rem;">El usuario puede retirar su consentimiento en cualquier momento a través del panel de configuración de cookies, accesible desde el footer del sitio.</p>
+        <p style="font-size:13.5px;line-height:1.7;margin-top:0.75rem;">El consentimiento tendrá una duración máxima de <strong>24 meses</strong>, tras los cuales se volverá a solicitar.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">5. Cómo eliminar o bloquear cookies</div>
+        <p style="font-size:13.5px;line-height:1.7;margin-bottom:0.75rem;">El usuario puede configurar su navegador para bloquear o eliminar cookies. Enlaces a las instrucciones de los navegadores más comunes:</p>
+        <ul style="font-size:13.5px;line-height:1.9;padding-left:1.25rem;">
+          <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" style="color:var(--aqua-700);">Google Chrome</a></li>
+          <li><a href="https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan" target="_blank" style="color:var(--aqua-700);">Mozilla Firefox</a></li>
+          <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" style="color:var(--aqua-700);">Safari</a></li>
+          <li><a href="https://support.microsoft.com/es-es/microsoft-edge" target="_blank" style="color:var(--aqua-700);">Microsoft Edge</a></li>
+        </ul>
+        <div class="alert alert-amber" style="margin-top:1rem;font-size:12.5px;">Si bloquea las cookies técnicas, algunas funcionalidades del sitio podrían no funcionar correctamente.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">6. Transferencias internacionales</div>
+        <p style="font-size:13.5px;line-height:1.7;">Al utilizar el modo "IA en la nube (Groq)", el usuario consiente que sus consultas y su clave API se transfieran a Groq, Inc. (Estados Unidos), que actúa como encargado del tratamiento bajo las garantías del Marco de Privacidad de Datos UE-EE. UU. o cláusulas contractuales tipo. Google Fonts carga tipografías desde servidores de Google LLC (Estados Unidos). Google recibe la dirección IP del usuario al cargar la página.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">7. Actualizaciones</div>
+        <p style="font-size:13.5px;line-height:1.7;">Esta Política de Cookies puede actualizarse en función de cambios normativos o técnicos. Se recomienda al usuario revisarla periódicamente.</p>
+      </div>
+
+      <div class="card">
+        <div style="font-size:15px;font-weight:600;margin-bottom:1rem;font-family:'Fraunces',serif;">8. Contacto</div>
+        <p style="font-size:13.5px;line-height:1.7;">Para cualquier duda sobre esta Política de Cookies, puede contactar en <a href="mailto:efectobermuabh@proton.me" style="color:var(--aqua-700);">efectobermuabh@proton.me</a>.</p>
+      </div>
+    </div>
   </main>
 </div>
 
 <footer>
   <p><strong>Autónomo sin drama</strong> · Guía completa España 2026</p>
   <p style="margin-top:0.5rem;">Información orientativa. Consulta siempre con un asesor fiscal para tu caso concreto.</p>
+  <nav style="margin-top:1.25rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;font-size:12.5px;align-items:center;">
+    <a href="#" onclick="showTab('aviso-legal', null); return false;">Aviso Legal</a>
+    <span style="color:var(--border);">·</span>
+    <a href="#" onclick="showTab('privacidad', null); return false;">Política de Privacidad</a>
+    <span style="color:var(--border);">·</span>
+    <a href="#" onclick="showTab('cookies', null); return false;">Política de Cookies</a>
+    <span style="color:var(--border);">·</span>
+    <a href="#" onclick="abrirConfigCookies(); return false;">Configurar cookies</a>
+  </nav>
+  <p style="margin-top:1rem;font-size:11.5px;">© 2026 Arnaldo Bermúdez · NIF Z3681288M · Todos los derechos reservados</p>
 </footer>
+
+<!-- BANNER DE COOKIES (primera capa) -->
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <div class="cookie-inner">
+    <div class="cookie-title">Tu privacidad nos importa</div>
+    <p class="cookie-text">
+      Utilizamos cookies propias técnicas y de personalización para que la web funcione correctamente y recuerde tus preferencias. No usamos cookies de análisis ni de publicidad. Puedes aceptar todas, rechazarlas o configurarlas a tu gusto.
+      <a href="#" onclick="showTab('cookies', null); document.getElementById('cookie-banner').classList.remove('visible'); return false;">Más información</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button class="cookie-btn cookie-btn-accept" onclick="aceptarTodasCookies()">Aceptar todas</button>
+      <button class="cookie-btn cookie-btn-reject" onclick="rechazarTodasCookies()">Rechazar todas</button>
+      <button class="cookie-btn cookie-btn-config" onclick="abrirConfigCookies()">Configurar</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL DE CONFIGURACIÓN (segunda capa) -->
+<div id="cookie-panel" role="dialog" aria-modal="true" aria-label="Configuración de cookies">
+  <div class="cookie-panel-content">
+    <div class="cookie-panel-header">
+      <div class="cookie-panel-title">Configuración de cookies</div>
+      <div class="cookie-panel-sub">Elige qué categorías de cookies quieres permitir.</div>
+    </div>
+    <div class="cookie-panel-body">
+
+      <div class="cookie-cat">
+        <div class="cookie-cat-row">
+          <div>
+            <div class="cookie-cat-name">Técnicas y necesarias</div>
+            <div class="cookie-cat-desc">Imprescindibles para el funcionamiento básico del sitio. No se pueden desactivar. Incluyen el almacenamiento de tu elección de cookies y la clave de Groq si usas el modo IA en la nube.</div>
+          </div>
+          <button class="cookie-toggle on disabled" disabled aria-label="Cookies técnicas (siempre activas)"></button>
+        </div>
+      </div>
+
+      <div class="cookie-cat">
+        <div class="cookie-cat-row">
+          <div>
+            <div class="cookie-cat-name">De personalización</div>
+            <div class="cookie-cat-desc">Recuerdan tus preferencias entre visitas: el estado del checklist del autónomo, el modo de IA seleccionado y otros ajustes de la interfaz.</div>
+          </div>
+          <button class="cookie-toggle on" id="toggle-personalizacion" onclick="toggleCat('personalizacion')" aria-label="Cookies de personalización"></button>
+        </div>
+      </div>
+
+      <div class="cookie-cat">
+        <div class="cookie-cat-row">
+          <div>
+            <div class="cookie-cat-name">De terceros (Google Fonts y Groq)</div>
+            <div class="cookie-cat-desc">Google Fonts carga las tipografías del sitio y Groq procesa las consultas si usas el modo IA en la nube. Estas conexiones envían tu dirección IP a servidores de Google y Groq en Estados Unidos.</div>
+          </div>
+          <button class="cookie-toggle on" id="toggle-terceros" onclick="toggleCat('terceros')" aria-label="Cookies de terceros"></button>
+        </div>
+      </div>
+
+    </div>
+    <div class="cookie-panel-footer">
+      <button class="cookie-btn cookie-btn-accept" onclick="guardarConfigCookies()">Guardar preferencias</button>
+      <button class="cookie-btn cookie-btn-accept" onclick="aceptarTodasCookies()">Aceptar todas</button>
+      <button class="cookie-btn cookie-btn-reject" onclick="rechazarTodasCookies()">Rechazar todas</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // ==========================================
@@ -1424,7 +1912,8 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
 function showTab(tab, el) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-item, .drawer-item').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
+  const target = document.getElementById('tab-'+tab);
+  if (target) target.classList.add('active');
   if (el) el.classList.add('active');
   cerrarDrawer();
   if (window.innerWidth <= 900) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1660,6 +2149,9 @@ function toggleCheck(i) {
   document.getElementById('cb'+i).textContent=checked[i]?'✓':'';
   document.getElementById('ct'+i).className='ch-text'+(checked[i]?' done':'');
   updateProgress();
+  if (typeof cookiePreferences !== 'undefined' && cookiePreferences.personalizacion) {
+    localStorage.setItem('checklist_state', JSON.stringify(checked));
+  }
 }
 
 function updateProgress() {
@@ -1860,6 +2352,105 @@ function removeTyping() {
 }
 
 // ==========================================
+// GESTIÓN DE COOKIES (LSSI + RGPD + AEPD)
+// ==========================================
+const COOKIE_CONSENT_KEY = 'cookies_consent';
+const COOKIE_CONSENT_VERSION = 1;
+const COOKIE_CONSENT_EXPIRY_DAYS = 730;
+
+let cookiePreferences = {
+  tecnicas: true,
+  personalizacion: false,
+  terceros: false,
+  version: COOKIE_CONSENT_VERSION,
+  fecha: null
+};
+
+function initCookies() {
+  const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      const fecha = new Date(parsed.fecha);
+      const ahora = new Date();
+      const diasTranscurridos = (ahora - fecha) / (1000 * 60 * 60 * 24);
+      if (parsed.version === COOKIE_CONSENT_VERSION && diasTranscurridos < COOKIE_CONSENT_EXPIRY_DAYS) {
+        cookiePreferences = parsed;
+        aplicarPreferencias();
+        return;
+      }
+    } catch (e) {}
+  }
+  document.getElementById('cookie-banner').classList.add('visible');
+}
+
+function aplicarPreferencias() {
+  if (cookiePreferences.personalizacion) {
+    const savedChecks = localStorage.getItem('checklist_state');
+    if (savedChecks) {
+      try {
+        checked = JSON.parse(savedChecks);
+        buildChecklist();
+      } catch (e) {}
+    }
+    const savedModo = localStorage.getItem('modo_ia');
+    if (savedModo) cambiarModo(savedModo);
+  }
+  const groqBtn = document.getElementById('modo-groq');
+  if (groqBtn) {
+    if (!cookiePreferences.terceros) {
+      groqBtn.style.opacity = '0.5';
+      groqBtn.title = 'Activa las cookies de terceros para usar este modo';
+    } else {
+      groqBtn.style.opacity = '1';
+      groqBtn.title = '';
+    }
+  }
+}
+
+function guardarConsentimiento() {
+  cookiePreferences.fecha = new Date().toISOString();
+  localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(cookiePreferences));
+  aplicarPreferencias();
+}
+
+function aceptarTodasCookies() {
+  cookiePreferences.tecnicas = true;
+  cookiePreferences.personalizacion = true;
+  cookiePreferences.terceros = true;
+  guardarConsentimiento();
+  document.getElementById('cookie-banner').classList.remove('visible');
+  document.getElementById('cookie-panel').classList.remove('visible');
+}
+
+function rechazarTodasCookies() {
+  cookiePreferences.tecnicas = true;
+  cookiePreferences.personalizacion = false;
+  cookiePreferences.terceros = false;
+  guardarConsentimiento();
+  document.getElementById('cookie-banner').classList.remove('visible');
+  document.getElementById('cookie-panel').classList.remove('visible');
+}
+
+function abrirConfigCookies() {
+  document.getElementById('toggle-personalizacion').classList.toggle('on', cookiePreferences.personalizacion);
+  document.getElementById('toggle-terceros').classList.toggle('on', cookiePreferences.terceros);
+  document.getElementById('cookie-panel').classList.add('visible');
+}
+
+function toggleCat(cat) {
+  const el = document.getElementById('toggle-' + cat);
+  el.classList.toggle('on');
+  cookiePreferences[cat] = el.classList.contains('on');
+}
+
+function guardarConfigCookies() {
+  guardarConsentimiento();
+  document.getElementById('cookie-panel').classList.remove('visible');
+  document.getElementById('cookie-banner').classList.remove('visible');
+}
+
+// ==========================================
 // INICIALIZACIÓN
 // ==========================================
 filtrarIAE();
@@ -1877,6 +2468,20 @@ if (claveGuardada) {
   document.getElementById('groq-estado').style.color = 'var(--aqua-700)';
 }
 cambiarModo('local');
+
+// Wrapper para guardar el modo de IA solo si personalización está aceptada
+const _cambiarModoOriginal = cambiarModo;
+cambiarModo = function(modo) {
+  _cambiarModoOriginal(modo);
+  if (typeof cookiePreferences !== 'undefined' && cookiePreferences.personalizacion) {
+    localStorage.setItem('modo_ia', modo);
+  }
+};
+
+// Iniciar gestión de cookies con pequeño delay
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(initCookies, 300);
+});
 
 // ==========================================
 // REGISTRO DEL SERVICE WORKER (PWA)
