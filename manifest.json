@@ -1,28 +1,66 @@
 {
   "name": "Autónomo sin drama · Guía España 2026",
   "short_name": "Autónomo",
-  "description": "Guía completa para autónomos en España: alta, impuestos, deducciones y calendario fiscal 2026.",
+  "description": "Guía completa para autónomos en España: alta, impuestos, deducciones, tarifa plana, cuota cero y calendario fiscal 2026.",
   "start_url": "./index.html",
   "scope": "./",
+  "id": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait-primary",
   "background_color": "#fdfbf7",
   "theme_color": "#0d7377",
   "lang": "es",
   "dir": "ltr",
-  "categories": ["finance", "productivity", "education"],
+  "categories": ["finance", "productivity", "education", "business"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calendario fiscal",
+      "short_name": "Calendario",
+      "description": "Consulta los próximos plazos trimestrales de Hacienda",
+      "url": "./index.html#calendario",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Calculadora de neto",
+      "short_name": "Calculadora",
+      "description": "Calcula cuánto te queda después de impuestos",
+      "url": "./index.html#calc",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Pregunta a la IA",
+      "short_name": "IA",
+      "description": "Consultas fiscales con inteligencia artificial",
+      "url": "./index.html#ia",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
