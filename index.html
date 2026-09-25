@@ -1344,6 +1344,13 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
   </aside>
 
   <main class="content">
+    <div id="skeleton-loader" class="skeleton-container">
+  <div class="skeleton-block skeleton-title"></div>
+  <div class="skeleton-block skeleton-line"></div>
+  <div class="skeleton-block skeleton-line"></div>
+  <div class="skeleton-block skeleton-line"></div>
+  <div class="skeleton-block skeleton-card"></div>
+</div>
     <div class="hero">
       <div class="hero-inner">
         <span class="hero-badge">Guía completa · España 2026</span>
@@ -2002,14 +2009,33 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
 // NAVEGACIÓN
 // ==========================================
 function showTab(tab, el) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const skeleton = document.getElementById('skeleton-loader');
+  const sections = document.querySelectorAll('.section');
+  
+  // Ocultar todas las secciones
+  sections.forEach(s => s.classList.remove('active'));
+  
+  // Mostrar skeleton
+  skeleton.classList.add('visible');
+  
+  // Esperar un frame para que el skeleton se pinte
+  requestAnimationFrame(() => {
+    // Mostrar la sección real
+    const target = document.getElementById('tab-'+tab);
+    if (target) target.classList.add('active');
+    
+    // Ocultar skeleton tras un mínimo de 200ms
+    setTimeout(() => {
+      skeleton.classList.remove('visible');
+    }, 200);
+  });
+  
   document.querySelectorAll('.sidebar-item, .drawer-item').forEach(t => t.classList.remove('active'));
-  const target = document.getElementById('tab-'+tab);
-  if (target) target.classList.add('active');
   if (el) el.classList.add('active');
   cerrarDrawer();
   if (window.innerWidth <= 900) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 
 function abrirDrawer() {
   document.getElementById('drawer').classList.add('open');
