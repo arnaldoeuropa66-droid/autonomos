@@ -2,7 +2,7 @@
   "name": "Autónomo sin drama · Guía España 2026",
   "short_name": "Autónomo",
   "description": "Guía completa para autónomos en España: alta, impuestos, deducciones y calendario fiscal 2026.",
-  "start_url": "/",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
