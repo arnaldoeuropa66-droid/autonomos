@@ -19,6 +19,40 @@
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>">
 <style>
+  /* Skeleton screens */
+.skeleton-container {
+  display: none;
+}
+.skeleton-container.visible {
+  display: block;
+}
+.skeleton-block {
+  background-color: #e9ebf0;
+  border-radius: 4px;
+  background-image: linear-gradient(
+    90deg,
+    #e9ebf0 25%,
+    #f7f8fa 37%,
+    #e9ebf0 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite, appear 0s linear 300ms forwards;
+  opacity: 0;
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+@keyframes appear {
+  to { opacity: 1; }
+}
+.skeleton-title { height: 32px; width: 60%; margin-bottom: 16px; }
+.skeleton-line { height: 16px; width: 100%; margin-bottom: 12px; }
+.skeleton-line:last-of-type { width: 70%; }
+.skeleton-card { height: 120px; width: 100%; margin-bottom: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block { animation: none; opacity: 1; }
+}
 /* Fuentes self-hosted · Sin conexión a Google */
 @font-face {
   font-family: 'Fraunces';
@@ -2499,9 +2533,10 @@ function abrirConfigCookies() {
 function toggleCat(cat) {
   const el = document.getElementById('toggle-' + cat);
   el.classList.toggle('on');
+  el.setAttribute('aria-pressed', el.classList.contains('on') ? 'true' : 'false');
   cookiePreferences[cat] = el.classList.contains('on');
 }
-
+  
 function guardarConfigCookies() {
   guardarConsentimiento();
   document.getElementById('cookie-panel').classList.remove('visible');
