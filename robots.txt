@@ -1,0 +1,9 @@
+# robots.txt · Autónomo sin drama
+# Última actualización: 2026-09-25
+
+User-agent: *
+Allow: /
+
+# No hay rutas que bloquear en este sitio
+
+Sitemap: https://TU-DOMINIO-AQUI/sitemap.xml
