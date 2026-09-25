@@ -85,7 +85,7 @@
   --aqua-900: #064e52;
   --ink: #1a1f2e;
   --ink-soft: #4a5262;
-  --ink-mute: #7a8291;
+  --ink-mute: #5c6472;
   --paper: #fdfbf7;
   --paper-warm: #f7f3ea;
   --white: #ffffff;
@@ -1199,7 +1199,15 @@ footer strong { color: var(--ink); font-family: 'Fraunces', serif; font-size: 14
 footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
 
 /* ============ RESPONSIVE ============ */
-@media (max-width: 900px) {
+@media (max-width: 900px)
+ .quick-q {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  } {
   .sidebar { display: none; }
   .menu-toggle { display: flex; }
   .layout { flex-direction: column; }
@@ -1932,7 +1940,7 @@ footer a { color: var(--aqua-700); text-decoration: none; font-weight: 500; }
             <div class="cookie-cat-name">De personalización</div>
             <div class="cookie-cat-desc">Recuerdan tus preferencias entre visitas: el estado del checklist del autónomo, el modo de IA seleccionado y otros ajustes de la interfaz.</div>
           </div>
-          <button class="cookie-toggle on" id="toggle-personalizacion" onclick="toggleCat('personalizacion')" aria-label="Cookies de personalización"></button>
+          <button class="cookie-toggle on" id="toggle-personalizacion" onclick="toggleCat('personalizacion')" aria-label="Cookies de personalización" aria-pressed="true"></button>
         </div>
       </div>
 
